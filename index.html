@@ -37,7 +37,7 @@
         .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo img { height: 40px; }
         .nav-logo span { font-size: 1.3em; font-weight: 800; color: var(--heading-color); }
-        .nav-links { list-style: none; display: flex; gap: 35px; margin: 0; padding: 0;}
+        .nav-links { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0;}
         .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 600; transition: color 0.3s; font-size: 1em; }
         .nav-links a:hover, .nav-links a.active-link { color: var(--primary-color); }
         .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001;}
@@ -50,14 +50,14 @@
 
         /* KPI Dashboard Section */
         #kpi-dashboard { padding: 40px 0; background-color: var(--light-bg-color); }
-        .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
-        .kpi-card { background-color: #fff; padding: 25px 20px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); transition: all 0.3s ease; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
+        .kpi-card { background-color: #fff; padding: 25px 20px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
         .kpi-card:hover { transform: translateY(-5px); box-shadow: var(--box-shadow-hover); }
         .kpi-icon { color: var(--primary-color); margin-bottom: 15px; }
         .kpi-icon svg { width: 40px; height: 40px; }
         .kpi-value { font-size: 2em; font-weight: 800; color: var(--heading-color); line-height: 1.2; }
         .kpi-label { font-weight: 600; color: var(--text-color); margin-top: 5px; }
-        .kpi-note { font-size: 0.8em; color: var(--text-color); opacity: 0.7; margin-top: 2px; }
+        .kpi-note { font-size: 0.8em; color: var(--text-color); opacity: 0.7; margin-top: 5px; }
 
         /* Analysis Section */
         #analysis { background-color: #fff; }
@@ -72,44 +72,21 @@
         .analysis-card.pain-points li svg { color: #de350b; }
         .analysis-card.objectives li svg { color: #00875a; }
         
-        /* Mindmap Section */
-        #mindmap { background-color: var(--light-bg-color); }
-        .mindmap-container { position: relative; min-height: 600px; display: flex; align-items: center; justify-content: center; }
-        .mindmap-center { position: absolute; width: 220px; height: 120px; background-color: var(--primary-color); color: var(--light-text-color); border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; font-size: 1.2em; z-index: 10; padding: 15px; box-shadow: var(--box-shadow-hover); }
-        .mindmap-node { position: absolute; background-color: #fff; padding: 20px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); width: 280px; border: 1px solid var(--border-color); z-index: 5; transition: all 0.3s ease; }
-        .mindmap-node:hover { transform: scale(1.05); z-index: 11; box-shadow: var(--box-shadow-hover); border-color: var(--primary-color); }
-        .mindmap-node h4 { margin: 0 0 10px; font-size: 1.1em; color: var(--primary-color); }
-        .mindmap-node ul { list-style: none; padding: 0; margin: 0; font-size: 0.9em; }
-        .node-1 { top: 0; left: 50%; transform: translateX(-50%); }
-        .node-2 { top: 50%; left: 0; transform: translateY(-50%); }
-        .node-3 { top: 50%; right: 0; transform: translateY(-50%); }
-        .node-4 { bottom: 0; left: 50%; transform: translateX(-50%); }
-        .mindmap-node::before { content: ''; position: absolute; background-color: var(--border-color); z-index: 1; }
-        .node-1::before { width: 4px; height: 100px; top: 100%; left: 50%; transform: translateX(-50%); }
-        .node-2::before { width: 100px; height: 4px; left: 100%; top: 50%; transform: translateY(-50%); }
-        .node-3::before { width: 100px; height: 4px; right: 100%; top: 50%; transform: translateY(-50%); }
-        .node-4::before { width: 4px; height: 100px; bottom: 100%; left: 50%; transform: translateX(-50%); }
-
-        /* Video & UI Slider Section */
-        #demo { background: #fff; }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 1000px; margin: 0 auto; border-radius: var(--border-radius); box-shadow: 0 10px 40px rgba(23, 43, 77, 0.2); }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .slider-container { max-width: 1000px; margin: 0 auto; position: relative; }
-        .slider-view { overflow: hidden; border-radius: var(--border-radius); }
-        .slider-wrapper { display: flex; transition: transform 0.5s ease-in-out; }
-        .slide { flex: 0 0 100%; }
-        .slide img { width: 100%; display: block; box-shadow: var(--box-shadow); aspect-ratio: 16 / 9; object-fit: cover; }
-        .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); width: calc(100% + 50px); left: -25px; display: flex; justify-content: space-between; box-sizing: border-box; }
-        .slider-nav button { background-color: rgba(23, 43, 77, 0.6); color: white; border: none; padding: 10px; font-size: 24px; cursor: pointer; border-radius: 50%; width: 50px; height: 50px; transition: background-color 0.3s; display: flex; align-items: center; justify-content: center; }
-        .slider-nav button:hover { background-color: rgba(23, 43, 77, 0.9); }
-        .slider-dots { text-align: center; margin-top: 20px; }
-        .dot { display: inline-block; width: 12px; height: 12px; background-color: var(--border-color); border-radius: 50%; margin: 0 6px; cursor: pointer; transition: all 0.3s; }
-        .dot.active { background-color: var(--primary-color); transform: scale(1.2); }
+        /* Technology Section */
+        #technology { background-color: var(--light-bg-color); }
+        .tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        .tech-card { background: #fff; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); border: 2px solid transparent; transition: all 0.3s ease-in-out; display: flex; flex-direction: column; }
+        .tech-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--box-shadow-hover); border-color: var(--primary-color); }
+        .tech-card h3 { display: flex; align-items: center; gap: 15px; font-size: 1.4em; color: var(--primary-color); margin: 0 0 15px 0; }
+        .tech-card h3 svg { width: 28px; height: 28px; }
+        .tech-card ul { list-style: none; padding-left: 0; flex-grow: 1; margin: 0; }
+        .tech-card li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+        .tech-card li svg { flex-shrink: 0; width: 20px; height: 20px; margin-top: 3px; color: #00875a; }
 
         /* Modules Section */
-        #modules { background-color: var(--light-bg-color); }
+        #modules { background-color: #fff; }
         .module-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-        .module-card { background: #fff; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); border: 2px solid transparent; transition: all 0.3s ease-in-out; display: flex; flex-direction: column; }
+        .module-card { background: var(--light-bg-color); padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); border: 2px solid transparent; transition: all 0.3s ease-in-out; display: flex; flex-direction: column; }
         .module-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--box-shadow-hover); border-color: var(--primary-color); }
         .module-card h3 { display: flex; align-items: center; gap: 15px; font-size: 1.4em; color: var(--primary-color); margin: 0 0 15px 0; }
         .module-card h3 svg { width: 28px; height: 28px; }
@@ -118,21 +95,21 @@
         .module-card li svg { flex-shrink: 0; width: 20px; height: 20px; margin-top: 3px; color: #00875a; }
 
         /* Roadmap Section */
-        #roadmap { background-color: #fff; }
+        #roadmap { background-color: var(--light-bg-color); }
         .roadmap-container { position: relative; max-width: 1000px; margin: 0 auto; padding: 30px 0; }
         .roadmap-container::before { content: ''; position: absolute; left: 50px; top: 0; bottom: 0; width: 4px; background: var(--border-color); }
         .roadmap-phase { position: relative; padding-left: 120px; margin-bottom: 50px; }
-        .phase-icon { position: absolute; left: 50px; top: 0; transform: translateX(-50%); width: 100px; height: 100px; background: var(--light-bg-color); border: 4px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1; }
+        .phase-icon { position: absolute; left: 50px; top: 0; transform: translateX(-50%); width: 100px; height: 100px; background: #fff; border: 4px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1; }
         .phase-icon svg { width: 48px; height: 48px; color: var(--primary-color); }
-        .phase-content { background: #fff; border: 1px solid var(--border-color); padding: 25px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); transition: all 0.3s ease-in-out; }
+        .phase-content { background: var(--light-bg-color); border: 1px solid var(--border-color); padding: 25px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); transition: all 0.3s ease-in-out; }
         .phase-content:hover { transform: scale(1.02); box-shadow: var(--box-shadow-hover); }
         .phase-content h3 { font-size: 1.6em; margin-top: 0; color: var(--primary-color); }
         .phase-content .lead-time { font-weight: 600; color: var(--text-color); margin-bottom: 15px; display: block; }
 
         /* Acceptance & RACI Section */
-        #acceptance { background-color: var(--light-bg-color); }
+        #acceptance { background-color: #fff; }
         .acceptance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .acceptance-card { background-color: #fff; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
+        .acceptance-card { background-color: var(--light-bg-color); padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
         .acceptance-card h3 { color: var(--heading-color); font-size: 1.5em; margin: 0 0 15px 0; }
         .raci-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
         .raci-table th, .raci-table td { padding: 12px; text-align: center; border: 1px solid var(--border-color); }
@@ -145,16 +122,16 @@
         .raci-table .i { background-color: #f4f5f7; }
 
         /* Team Section */
-        #experts { background-color: #fff; }
+        #experts { background-color: var(--light-bg-color); }
         .experts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; } 
-        .expert-card { background: var(--light-bg-color); padding: 30px; border-radius: var(--border-radius); text-align: center; box-shadow: var(--box-shadow); border: 2px solid transparent; transition: all 0.3s ease-in-out; } 
+        .expert-card { background: #fff; padding: 30px; border-radius: var(--border-radius); text-align: center; box-shadow: var(--box-shadow); border: 2px solid transparent; transition: all 0.3s ease-in-out; } 
         .expert-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--box-shadow-hover); border-color: var(--primary-color); }
         .expert-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; } 
         .expert-card h3 { font-size: 1.3em; color: var(--heading-color); margin-bottom: 5px; } 
         .expert-card .title { color: var(--primary-color); font-weight: 600; margin-bottom: 15px; }
 
         /* Maintenance Section */
-        #maintenance { background-color: var(--light-bg-color); }
+        #maintenance { background-color: #fff; }
         .maintenance-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .maintenance-table { width: 100%; border-collapse: collapse; margin-top: 30px; background-color: #fff; box-shadow: var(--box-shadow); }
         .maintenance-table th, .maintenance-table td { padding: 15px; text-align: left; border: 1px solid var(--border-color); }
@@ -176,11 +153,8 @@
         /* Responsive */
         @media (max-width: 991px) {
             .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .tech-grid, .module-grid, .experts-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .analysis-grid, .acceptance-grid, .footer-grid { grid-template-columns: 1fr; }
-            .module-grid, .experts-grid { grid-template-columns: repeat(2, 1fr); }
-            .mindmap-container { min-height: auto; flex-direction: column; gap: 20px; padding: 20px 0;}
-            .mindmap-center, .mindmap-node { position: static; transform: none !important; width: 100%; max-width: 500px; }
-            .mindmap-node::before { display: none; }
         }
 
         @media (max-width: 768px) {
@@ -191,15 +165,13 @@
             .roadmap-phase { padding-left: 70px; }
             .phase-icon { width: 50px; height: 50px; left: 25px; }
             .phase-icon svg { width: 24px; height: 24px; }
-            .slider-nav { display: none; }
             .section-title { font-size: 2.2em; }
             .hero h1 { font-size: 2.5em; }
-            .module-grid, .experts-grid { gap: 20px; }
+            .module-grid, .experts-grid, .tech-grid { gap: 20px; }
         }
 
         @media (max-width: 576px) {
-            .kpi-grid { grid-template-columns: 1fr; }
-            .module-grid, .experts-grid { grid-template-columns: 1fr; }
+            .kpi-grid, .module-grid, .experts-grid, .tech-grid, .analysis-grid, .acceptance-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -213,9 +185,11 @@
             <ul class="nav-links" id="nav-links"> 
                 <li><a href="#hero">Giới thiệu</a></li>
                 <li><a href="#analysis">Phân tích</a></li>
+                <li><a href="#technology">Công nghệ</a></li>
                 <li><a href="#modules">Phạm vi</a></li> 
                 <li><a href="#roadmap">Lộ trình</a></li> 
-                <li><a href="#experts">Đội ngũ</a></li> 
+                <li><a href="#experts">Đội ngũ</a></li>
+                <li><a href="#acceptance">Nghiệm thu</a></li>
                 <li><a href="#maintenance">Bảo trì</a></li>
             </ul>
              <button class="nav-toggle" id="nav-toggle" aria-label="Mở menu">
@@ -237,25 +211,37 @@
             <div class="container">
                 <div class="kpi-grid fade-in">
                     <div class="kpi-card">
+                        <div class="kpi-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25A2.25 2.25 0 0113.5 8.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25a2.25 2.25 0 01-2.25-2.25v-2.25z" /></svg></div>
+                        <div class="kpi-value">9+</div>
+                        <div class="kpi-label">Quy trình chính</div>
+                    </div>
+                     <div class="kpi-card">
+                        <div class="kpi-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg></div>
+                        <div class="kpi-value">4</div>
+                        <div class="kpi-label">Số Giai đoạn</div>
+                    </div>
+                    <div class="kpi-card">
                         <div class="kpi-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0h18M12 12.75h.008v.008H12v-.008z" /></svg></div>
                         <div class="kpi-value">16 Tuần</div>
                         <div class="kpi-label">Tổng thời gian</div>
                     </div>
                     <div class="kpi-card">
-                        <div class="kpi-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25A2.25 2.25 0 0113.5 8.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25a2.25 2.25 0 01-2.25-2.25v-2.25z" /></svg></div>
-                        <div class="kpi-value">9+</div>
-                        <div class="kpi-label">Quy trình chính</div>
-                    </div>
-                    <div class="kpi-card">
                         <div class="kpi-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-15c-.621 0-1.125-.504-1.125-1.125v-9.75c0-.621.504-1.125 1.125-1.125h1.5" /></svg></div>
                         <div class="kpi-value">183.6M</div>
-                        <div class="kpi-label">Ngân sách (VAT)</div>
+                        <div class="kpi-label">Chi phí xây dựng</div>
+                         <div class="kpi-note">(Đã bao gồm VAT)</div>
                     </div>
                      <div class="kpi-card">
                         <div class="kpi-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-1.003 1.11-1.226M15 21h-6a2.25 2.25 0 01-2.25-2.25V15M21 15v-1.5a2.25 2.25 0 00-2.25-2.25H9.75M9 3.75H6.75A2.25 2.25 0 004.5 6v12a2.25 2.25 0 002.25 2.25h10.5" /></svg></div>
                         <div class="kpi-value">Theo Nhu Cầu</div>
-                        <div class="kpi-label">Chi phí License</div>
+                        <div class="kpi-label">Phí License</div>
                         <div class="kpi-note">(Google Workspace)</div>
+                    </div>
+                     <div class="kpi-card">
+                        <div class="kpi-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg></div>
+                        <div class="kpi-value">11.016M</div>
+                        <div class="kpi-label">Hỗ trợ Kỹ thuật</div>
+                        <div class="kpi-note">(6% GT HĐ / Năm)</div>
                     </div>
                 </div>
             </div>
@@ -303,16 +289,43 @@
             </div>
         </section>
 
-        <section id="mindmap">
+        <section id="technology">
             <div class="container">
-                <h2 class="section-title fade-in">Cấu trúc Hệ thống & Quy trình</h2>
-                <p class="section-subtitle fade-in">Sơ đồ tổng quan thể hiện mối liên kết giữa các quy trình và phân hệ chức năng chính của hệ thống, giúp hình dung rõ luồng hoạt động tích hợp.</p>
-                <div class="mindmap-container fade-in">
-                    <div class="mindmap-center">Hệ thống Quản lý ISO Tích hợp</div>
-                    <div class="mindmap-node node-1"><h4>Quản lý Tài liệu & Hồ sơ</h4><ul><li>- Quy trình Soạn thảo & Góp ý</li><li>- Quy trình Phê duyệt & Ban hành</li><li>- Kiểm soát Phiên bản & Phân phối</li></ul></div>
-                    <div class="mindmap-node node-2"><h4>Quản lý Nguồn lực</h4><ul><li>- Quản lý Nhân sự & Năng lực</li><li>- Quản lý Thiết bị & Hiệu chuẩn</li><li>- Quản lý Nhà cung cấp</li></ul></div>
-                    <div class="mindmap-node node-3"><h4>Quản lý Đánh giá & Cải tiến</h4><ul><li>- Đánh giá nội bộ & Checklist</li><li>- Sự không phù hợp (NC)</li><li>- Hành động Khắc phục (CAR)</li></ul></div>
-                    <div class="mindmap-node node-4"><h4>Báo cáo & Phân tích</h4><ul><li>- Dashboard & KPIs</li><li>- Báo cáo Tuân thủ</li><li>- Cảnh báo & Thông báo Tự động</li></ul></div>
+                <h2 class="section-title fade-in">Nền tảng Công nghệ & Ứng dụng</h2>
+                <p class="section-subtitle fade-in">Giải pháp được xây dựng dựa trên hệ sinh thái bảo mật, linh hoạt và mạnh mẽ của Google Cloud, kết hợp các công cụ no-code, low-code và ký số để mang lại hiệu quả cao nhất.</p>
+                <div class="tech-grid fade-in">
+                    <div class="tech-card">
+                        <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.378 1.602a.75.75 0 00-.756 0L3 7.225V18a.75.75 0 00.75.75h16.5a.75.75 0 00.75-.75V7.225l-8.622-5.623zM12 11.25a.75.75 0 01.75.75v5.25a.75.75 0 01-1.5 0v-5.25a.75.75 0 01.75-.75zM10.125 15a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5h-3.75z"/></svg>Google Workspace</h3>
+                        <ul>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div><strong>Nền tảng vận hành:</strong> Cung cấp email doanh nghiệp, bộ công cụ văn phòng (Docs, Sheets, Slides) và không gian lưu trữ an toàn (Drive).</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div><strong>Hợp tác & Giao tiếp:</strong> Tích hợp sẵn Google Chat, Meet, Calendar giúp tối ưu hóa việc trao đổi, lên lịch và làm việc nhóm.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div><strong>Bảo mật & Quản trị:</strong> Cung cấp các công cụ quản lý người dùng, thiết bị và kiểm soát an ninh dữ liệu cấp doanh nghiệp.</div></li>
+                        </ul>
+                    </div>
+                    <div class="tech-card">
+                         <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.378 1.602a.75.75 0 00-.756 0L3 7.225V18a.75.75 0 00.75.75h16.5a.75.75 0 00.75-.75V7.225l-8.622-5.623zM12 11.25a.75.75 0 01.75.75v5.25a.75.75 0 01-1.5 0v-5.25a.75.75 0 01.75-.75zM10.125 15a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5h-3.75z"/></svg>Google AppSheet</h3>
+                        <ul>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div><strong>Xây dựng ứng dụng:</strong> Nền tảng No-Code để tạo giao diện người dùng, quản lý dữ liệu và logic nghiệp vụ một cách nhanh chóng.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div><strong>Kết nối dữ liệu:</strong> Tích hợp trực tiếp với Google Sheets làm cơ sở dữ liệu, cho phép cập nhật thông tin theo thời gian thực.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div><strong>Tự động hóa tích hợp:</strong> Tạo các quy trình tự động (Automation) để gửi email, tạo file và gọi các kịch bản phức tạp hơn.</div></li>
+                        </ul>
+                    </div>
+                     <div class="tech-card">
+                         <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>Google Apps Script</h3>
+                        <ul>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div><strong>Mở rộng chức năng:</strong> Sử dụng ngôn ngữ JavaScript để viết các hàm tùy chỉnh, xử lý logic phức tạp mà AppSheet không hỗ trợ.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div><strong>Tự động hóa nâng cao:</strong> Tạo các trigger (ví dụ: chạy hàng ngày, hàng tuần) để tự động tạo báo cáo, gửi email hàng loạt, backup dữ liệu.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div><strong>Tích hợp API:</strong> Kết nối với các dịch vụ bên thứ ba (VD: Telegram, Zalo) hoặc các hệ thống khác thông qua API.</div></li>
+                        </ul>
+                    </div>
+                    <div class="tech-card">
+                         <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3A5.25 5.25 0 0012 1.5zm-3.75 5.25a3.75 3.75 0 107.5 0v3h-7.5v-3z" clip-rule="evenodd" /></svg>Token Ký số (USB)</h3>
+                        <ul>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div><strong>Xác thực & Phê duyệt:</strong> Tích hợp giải pháp ký số để thực hiện phê duyệt tài liệu, văn bản có giá trị pháp lý ngay trên hệ thống.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div><strong>Quy trình ký:</strong> Apps Script sẽ tạo ra file tài liệu (PDF), sau đó gọi ứng dụng eSigner trên máy tính để người dùng chọn chứng thư số và ký.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div><strong>Đảm bảo tuân thủ:</strong> Đảm bảo tính toàn vẹn, chống chối bỏ của tài liệu đã được phê duyệt, đáp ứng các yêu cầu khắt khe của ISO.</div></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -365,18 +378,15 @@
                     <div class="roadmap-phase">
                         <div class="phase-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 18V7.125c0-.621.504-1.125 1.125-1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V7.5z" /></svg></div>
                         <div class="phase-content">
-                            <h3>Giai đoạn 1: Phác thảo & Báo giá</h3>
+                            <h3>Giai đoạn 1: Khảo sát & Thiết kế</h3>
                             <span class="lead-time">Lead time: 2 Tuần</span>
                             <div class="phase-details">
-                                <h4>Hoạt động chính:</h4>
                                 <ul>
                                     <li>Tổ chức buổi họp khởi động (Kick-off meeting).</li>
                                     <li>Khảo sát và phân tích chi tiết quy trình hiện tại.</li>
-                                    <li>Xác định các yêu cầu chức năng và phi chức năng.</li>
                                     <li>Thiết kế giải pháp tổng thể và kiến trúc hệ thống.</li>
+                                    <li>Xây dựng tài liệu Phân tích Yêu cầu (BRD).</li>
                                 </ul>
-                                <h4>Sản phẩm bàn giao:</h4>
-                                <ul><li>Tài liệu Phân tích Yêu cầu (BRD) & Báo giá chi tiết.</li></ul>
                             </div>
                         </div>
                     </div>
@@ -386,15 +396,12 @@
                             <h3>Giai đoạn 2: Triển khai & Phát triển</h3>
                             <span class="lead-time">Lead time: 11 Tuần</span>
                             <div class="phase-details">
-                                <h4>Hoạt động chính:</h4>
                                 <ul>
                                     <li>Cấu hình môi trường Google Workspace.</li>
                                     <li>Phát triển các module chức năng trên Google AppSheet.</li>
                                     <li>Viết mã tùy chỉnh bằng Google Apps Script để tự động hóa.</li>
                                     <li>Kiểm thử đơn vị (Unit Test) và tích hợp (Integration Test).</li>
                                 </ul>
-                                <h4>Sản phẩm bàn giao:</h4>
-                                <ul><li>Hệ thống phần mềm phiên bản Alpha & Beta, Báo cáo tiến độ.</li></ul>
                             </div>
                         </div>
                     </div>
@@ -404,14 +411,11 @@
                             <h3>Giai đoạn 3: Nghiệm thu & Đào tạo</h3>
                             <span class="lead-time">Lead time: 2 Tuần</span>
                             <div class="phase-details">
-                                <h4>Hoạt động chính:</h4>
                                 <ul>
                                     <li>Hỗ trợ khách hàng thực hiện Kiểm thử Chấp nhận Người dùng (UAT).</li>
                                     <li>Ghi nhận, xử lý các phản hồi và tinh chỉnh hệ thống.</li>
                                     <li>Tổ chức các buổi đào tạo cho đội ngũ quản trị và người dùng cuối.</li>
                                 </ul>
-                                <h4>Sản phẩm bàn giao:</h4>
-                                <ul><li>Biên bản UAT & Tài liệu hướng dẫn sử dụng.</li></ul>
                             </div>
                         </div>
                     </div>
@@ -421,14 +425,11 @@
                             <h3>Giai đoạn 4: Bàn giao & Vận hành</h3>
                             <span class="lead-time">Lead time: 1 Tuần</span>
                             <div class="phase-details">
-                                <h4>Hoạt động chính:</h4>
                                 <ul>
                                     <li>Triển khai hệ thống lên môi trường chính thức (Go-live).</li>
                                     <li>Bàn giao toàn bộ tài khoản quản trị và tài liệu dự án.</li>
                                     <li>Ký biên bản nghiệm thu và bắt đầu giai đoạn bảo trì.</li>
                                 </ul>
-                                <h4>Sản phẩm bàn giao:</h4>
-                                <ul><li>Hệ thống hoạt động chính thức & Biên bản nghiệm thu.</li></ul>
                             </div>
                         </div>
                     </div>
@@ -436,18 +437,30 @@
             </div>
         </section>
 
+        <section id="experts"> 
+            <div class="container"> 
+                <h2 class="section-title fade-in">Đội ngũ Dự án</h2> 
+                <div class="experts-grid fade-in"> 
+                    <div class="expert-card"> <img src="https://admin.gpems.net/storage/uploads/courses/lecturers/dwDwZCThmWPgEM0kDi8XnYWkuLke9k-metaNzI0MjU1MTcwMTY2NzAzMTA4MC5wbmc%3D-.png" alt="Nguyễn Tấn Hiền"> <h3>Nguyễn Tấn Hiền</h3> <p class="title">Project Director</p> </div> 
+                    <div class="expert-card"> <img src="https://admin.gpems.net/storage/uploads/courses/lecturers/mlXRjIPyPsdcucphnW5fNbCrq9IRoH-metaMTkwMjE3NjgyNzE2NzE1MzM0MzAuanBn-.jpg" alt="Nguyễn Văn Hòa"> <h3>Nguyễn Văn Hòa</h3> <p class="title">Technical Lead</p> </div> 
+                    <div class="expert-card"> <img src="https://i.pravatar.cc/150?img=60" alt="Nguyễn Mạnh Tân"> <h3>Nguyễn Mạnh Tân</h3> <p class="title">Business Analyst</p> </div> 
+                    <div class="expert-card"> <img src="https://i.pravatar.cc/150?img=32" alt="Trần Minh Anh"> <h3>Trần Minh Anh</h3> <p class="title">QA/QC Specialist</p> </div> 
+                </div>
+            </div> 
+        </section>
+
         <section id="acceptance">
            <div class="container">
                 <h2 class="section-title fade-in">Nghiệm thu & Phân chia Trách nhiệm</h2>
                 <div class="acceptance-grid fade-in">
                     <div class="acceptance-card">
-                        <h3>Tiêu chí Bàn giao & Bảo trì</h3>
+                        <h3>Tiêu chí Bàn giao</h3>
                         <p>Dự án được xem là hoàn thành khi đáp ứng các tiêu chí:</p>
                         <ul>
                             <li>Tất cả các chức năng trong phạm vi đã hoạt động ổn định.</li>
                             <li>Hệ thống đáp ứng các yêu cầu phi chức năng (bảo mật, hiệu năng).</li>
                             <li>Hoàn thành việc đào tạo và bàn giao đầy đủ tài liệu.</li>
-                            <li><strong>Chính sách Bảo trì:</strong> 12 tháng hỗ trợ kỹ thuật miễn phí sau nghiệm thu.</li>
+                            <li>Hai bên ký Biên bản Nghiệm thu & Thanh lý Hợp đồng.</li>
                         </ul>
                     </div>
                      <div class="acceptance-card">
@@ -469,22 +482,10 @@
             </div>
         </section>
 
-        <section id="experts"> 
-            <div class="container"> 
-                <h2 class="section-title fade-in">Đội ngũ Dự án</h2> 
-                <div class="experts-grid fade-in"> 
-                    <div class="expert-card"> <img src="https://admin.gpems.net/storage/uploads/courses/lecturers/dwDwZCThmWPgEM0kDi8XnYWkuLke9k-metaNzI0MjU1MTcwMTY2NzAzMTA4MC5wbmc%3D-.png" alt="Nguyễn Tấn Hiền"> <h3>Nguyễn Tấn Hiền</h3> <p class="title">Project Director</p> </div> 
-                    <div class="expert-card"> <img src="https://admin.gpems.net/storage/uploads/courses/lecturers/mlXRjIPyPsdcucphnW5fNbCrq9IRoH-metaMTkwMjE3NjgyNzE2NzE1MzM0MzAuanBn-.jpg" alt="Nguyễn Văn Hòa"> <h3>Nguyễn Văn Hòa</h3> <p class="title">Technical Lead</p> </div> 
-                    <div class="expert-card"> <img src="https://i.pravatar.cc/150?img=60" alt="Nguyễn Mạnh Tân"> <h3>Nguyễn Mạnh Tân</h3> <p class="title">Business Analyst</p> </div> 
-                    <div class="expert-card"> <img src="https://i.pravatar.cc/150?img=32" alt="Trần Minh Anh"> <h3>Trần Minh Anh</h3> <p class="title">QA/QC Specialist</p> </div> 
-                </div>
-            </div> 
-        </section>
-
         <section id="maintenance">
             <div class="container">
                 <h2 class="section-title fade-in">Kế hoạch Bảo trì & Hỗ trợ</h2>
-                <p class="section-subtitle fade-in">Cam kết đồng hành cùng khách hàng sau khi dự án đi vào hoạt động, đảm bảo hệ thống vận hành ổn định và hiệu quả.</p>
+                <p class="section-subtitle fade-in">Cam kết đồng hành cùng khách hàng sau khi dự án đi vào hoạt động (12 tháng miễn phí), đảm bảo hệ thống vận hành ổn định và hiệu quả.</p>
                 <div class="maintenance-table-wrapper fade-in">
                     <table class="maintenance-table">
                         <thead>
@@ -606,52 +607,6 @@
                         navMenu.classList.remove('show-menu');
                     });
                 });
-            }
-
-            // UI Slider Logic
-            const sliderContainer = document.querySelector('.slider-container');
-            if (sliderContainer) {
-                const sliderWrapper = sliderContainer.querySelector('.slider-wrapper');
-                const slides = Array.from(sliderWrapper.children);
-                const prevBtn = document.getElementById('prevBtn');
-                const nextBtn = document.getElementById('nextBtn');
-                const dotsContainer = sliderContainer.querySelector('.slider-dots');
-                
-                let currentIndex = 0;
-                const totalSlides = slides.length;
-                let autoPlayInterval;
-
-                if (totalSlides > 0) {
-                    slides.forEach((_, i) => {
-                        const dot = document.createElement('div');
-                        dot.classList.add('dot');
-                        dot.addEventListener('click', () => { goToSlide(i); resetAutoPlay(); });
-                        dotsContainer.appendChild(dot);
-                    });
-                    const dots = sliderContainer.querySelectorAll('.dot');
-                    
-                    const setSlidePosition = () => {
-                        sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-                        dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
-                    }
-
-                    const goToSlide = (index) => { currentIndex = index; setSlidePosition(); }
-                    const nextSlide = () => { currentIndex = (currentIndex + 1) % totalSlides; setSlidePosition(); }
-                    const prevSlide = () => { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; setSlidePosition(); }
-                    
-                    const resetAutoPlay = () => {
-                        clearInterval(autoPlayInterval);
-                        autoPlayInterval = setInterval(nextSlide, 5000);
-                    }
-                    
-                    if(nextBtn && prevBtn) {
-                        nextBtn.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
-                        prevBtn.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
-                    }
-                    
-                    setSlidePosition();
-                    resetAutoPlay();
-                }
             }
         });
     </script>
