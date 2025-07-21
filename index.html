@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hệ Thống Quản lý ISO Tích Hợp - Cục Tần Số Vô Tuyến</title>
-    <meta name="description" content="Kế hoạch triển khai chi tiết dự án xây dựng Hệ thống Quản lý Tài liệu & Hồ sơ theo tiêu chuẩn ISO 9001, 17025, 17065 cho Trung Tâm Kỹ Thuật - Cục Tần Số Vô Tuyến, thực hiện bởi EMS SOLUTION.">
+    <meta name="description" content="Kế hoạch triển khai chi tiết dự án xây dựng Hệ thống Quản lý Tài liệu & Hồ sơ nội bộ <br> tại Cục Tần Số Vô Tuyến Điện <br>theo tiêu chuẩn ISO 9001, 17025, 17065 cho Trung Tâm Kỹ Thuật - Cục Tần Số Vô Tuyến, thực hiện bởi EMS SOLUTION.">
     <meta name="author" content="EMS SOLUTION">
     <link rel="icon" type="image/png" href="https://gpems.net/logo-icon.png">
 
@@ -37,8 +36,8 @@
         .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo img { height: 40px; }
         .nav-logo span { font-size: 1.3em; font-weight: 800; color: var(--heading-color); }
-        .nav-links { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0;}
-        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 600; transition: color 0.3s; font-size: 1em; }
+        .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0;}
+        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 600; transition: color 0.3s; font-size: 0.95em; }
         .nav-links a:hover, .nav-links a.active-link { color: var(--primary-color); }
         .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001;}
 
@@ -71,8 +70,8 @@
         .analysis-card li svg { flex-shrink: 0; width: 22px; height: 22px; margin-top: 2px; }
         .analysis-card.pain-points li svg { color: #de350b; }
         .analysis-card.objectives li svg { color: #00875a; }
-
-                /* Mindmap Section */
+        
+        /* START: Mindmap Section CSS */
         #mindmap { background-color: var(--light-bg-color); }
         .mindmap-container { position: relative; min-height: 600px; display: flex; align-items: center; justify-content: center; }
         .mindmap-center { position: absolute; width: 220px; height: 120px; background-color: var(--primary-color); color: var(--light-text-color); border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; font-size: 1.2em; z-index: 10; padding: 15px; box-shadow: var(--box-shadow-hover); }
@@ -80,15 +79,19 @@
         .mindmap-node:hover { transform: scale(1.05); z-index: 11; box-shadow: var(--box-shadow-hover); border-color: var(--primary-color); }
         .mindmap-node h4 { margin: 0 0 10px; font-size: 1.1em; color: var(--primary-color); }
         .mindmap-node ul { list-style: none; padding: 0; margin: 0; font-size: 0.9em; }
+        .mindmap-node li { margin-bottom: 5px; }
+        /* Positioning nodes */
         .node-1 { top: 0; left: 50%; transform: translateX(-50%); }
         .node-2 { top: 50%; left: 0; transform: translateY(-50%); }
         .node-3 { top: 50%; right: 0; transform: translateY(-50%); }
         .node-4 { bottom: 0; left: 50%; transform: translateX(-50%); }
+        /* Connectors */
         .mindmap-node::before { content: ''; position: absolute; background-color: var(--border-color); z-index: 1; }
         .node-1::before { width: 4px; height: 100px; top: 100%; left: 50%; transform: translateX(-50%); }
         .node-2::before { width: 100px; height: 4px; left: 100%; top: 50%; transform: translateY(-50%); }
         .node-3::before { width: 100px; height: 4px; right: 100%; top: 50%; transform: translateY(-50%); }
         .node-4::before { width: 4px; height: 100px; bottom: 100%; left: 50%; transform: translateX(-50%); }
+        /* END: Mindmap Section CSS */
 
         /* Video & UI Slider Section */
         #demo { background: #fff; }
@@ -99,13 +102,13 @@
         .slider-wrapper { display: flex; transition: transform 0.5s ease-in-out; }
         .slide { flex: 0 0 100%; }
         .slide img { width: 100%; display: block; box-shadow: var(--box-shadow); aspect-ratio: 16 / 9; object-fit: cover; }
-        .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); width: calc(100% + 50px); left: -25px; display: flex; justify-content: space-between; box-sizing: border-box; }
-        .slider-nav button { background-color: rgba(23, 43, 77, 0.6); color: white; border: none; padding: 10px; font-size: 24px; cursor: pointer; border-radius: 50%; width: 50px; height: 50px; transition: background-color 0.3s; display: flex; align-items: center; justify-content: center; }
+        .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); width: calc(100% + 60px); left: -30px; display: flex; justify-content: space-between; box-sizing: border-box; }
+        .slider-nav button { background-color: rgba(23, 43, 77, 0.6); color: white; border: none; padding: 10px; cursor: pointer; border-radius: 50%; width: 50px; height: 50px; transition: background-color 0.3s; display: flex; align-items: center; justify-content: center; }
         .slider-nav button:hover { background-color: rgba(23, 43, 77, 0.9); }
         .slider-dots { text-align: center; margin-top: 20px; }
         .dot { display: inline-block; width: 12px; height: 12px; background-color: var(--border-color); border-radius: 50%; margin: 0 6px; cursor: pointer; transition: all 0.3s; }
         .dot.active { background-color: var(--primary-color); transform: scale(1.2); }
-        
+
         /* Technology Section */
         #technology { background-color: var(--light-bg-color); }
         .tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
@@ -139,13 +142,22 @@
         .phase-content:hover { transform: scale(1.02); box-shadow: var(--box-shadow-hover); }
         .phase-content h3 { font-size: 1.6em; margin-top: 0; color: var(--primary-color); }
         .phase-content .lead-time { font-weight: 600; color: var(--text-color); margin-bottom: 15px; display: block; }
+        
+        /* Team Section */
+        #experts { background-color: #fff; }
+        .experts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; } 
+        .expert-card { background: var(--light-bg-color); padding: 30px; border-radius: var(--border-radius); text-align: center; box-shadow: var(--box-shadow); border: 2px solid transparent; transition: all 0.3s ease-in-out; } 
+        .expert-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--box-shadow-hover); border-color: var(--primary-color); }
+        .expert-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; } 
+        .expert-card h3 { font-size: 1.3em; color: var(--heading-color); margin-bottom: 5px; } 
+        .expert-card .title { color: var(--primary-color); font-weight: 600; margin-bottom: 15px; }
 
         /* Acceptance & RACI Section */
-        #acceptance { background-color: #fff; }
+        #acceptance { background-color: var(--light-bg-color); }
         .acceptance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .acceptance-card { background-color: var(--light-bg-color); padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
+        .raci-table { width: 100%; border-collapse: collapse; font-size: 0.9em; margin-top: 15px; }
+        .acceptance-card { background-color: #fff; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
         .acceptance-card h3 { color: var(--heading-color); font-size: 1.5em; margin: 0 0 15px 0; }
-        .raci-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
         .raci-table th, .raci-table td { padding: 12px; text-align: center; border: 1px solid var(--border-color); }
         .raci-table th { background-color: #fafbfb; }
         .raci-table td:first-child { text-align: left; font-weight: 600; }
@@ -154,15 +166,6 @@
         .raci-table .a { background-color: #deebff; }
         .raci-table .c { background-color: #fff0b3; }
         .raci-table .i { background-color: #f4f5f7; }
-
-        /* Team Section */
-        #experts { background-color: var(--light-bg-color); }
-        .experts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; } 
-        .expert-card { background: #fff; padding: 30px; border-radius: var(--border-radius); text-align: center; box-shadow: var(--box-shadow); border: 2px solid transparent; transition: all 0.3s ease-in-out; } 
-        .expert-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--box-shadow-hover); border-color: var(--primary-color); }
-        .expert-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; } 
-        .expert-card h3 { font-size: 1.3em; color: var(--heading-color); margin-bottom: 5px; } 
-        .expert-card .title { color: var(--primary-color); font-weight: 600; margin-bottom: 15px; }
 
         /* Maintenance Section */
         #maintenance { background-color: #fff; }
@@ -185,25 +188,30 @@
         .copyright { text-align: center; padding-top: 30px; border-top: 1px solid #2c3e50; font-size: 0.9em; margin-top: 40px; }
 
         /* Responsive */
-        @media (max-width: 991px) {
-            .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-            .tech-grid, .module-grid, .experts-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-            .analysis-grid, .acceptance-grid, .footer-grid { grid-template-columns: 1fr; }
+        @media (max-width: 1024px) {
+             .nav-links { gap: 20px;}
+             .nav-links a { font-size: 0.9em; }
         }
-
+        @media (max-width: 991px) {
+            .kpi-grid, .tech-grid, .module-grid, .experts-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .analysis-grid, .acceptance-grid, .footer-grid { grid-template-columns: 1fr; }
+            .mindmap-container { min-height: auto; flex-direction: column; gap: 20px; padding: 20px 0;}
+            .mindmap-center, .mindmap-node { position: static; transform: none !important; width: 100%; max-width: 500px; }
+            .mindmap-node::before { display: none; }
+        }
         @media (max-width: 768px) {
             .nav-toggle { display: block; }
             .nav-links { display: none; position: fixed; top: 0; right: -100%; width: 70%; max-width: 300px; height: 100vh; background-color: #fff; flex-direction: column; align-items: center; justify-content: center; gap: 30px; box-shadow: -5px 0 15px rgba(23, 43, 77, 0.1); transition: right 0.4s ease-in-out; z-index: 1000; }
             .nav-links.show-menu { display: flex; right: 0; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
             .roadmap-container::before { left: 25px; }
             .roadmap-phase { padding-left: 70px; }
             .phase-icon { width: 50px; height: 50px; left: 25px; }
             .phase-icon svg { width: 24px; height: 24px; }
+            .slider-nav { display: none; }
             .section-title { font-size: 2.2em; }
             .hero h1 { font-size: 2.5em; }
-            .module-grid, .experts-grid, .tech-grid { gap: 20px; }
         }
-
         @media (max-width: 576px) {
             .kpi-grid, .module-grid, .experts-grid, .tech-grid, .analysis-grid, .acceptance-grid { grid-template-columns: 1fr; }
         }
@@ -217,13 +225,13 @@
                 <span>EMS SOLUTION</span>
             </a> 
             <ul class="nav-links" id="nav-links"> 
-                <li><a href="#hero">Giới thiệu</a></li>
+                <li><a href="#hero" class="active-link">Giới thiệu</a></li>
                 <li><a href="#analysis">Phân tích</a></li>
+                <li><a href="#demo">Demo</a></li>
                 <li><a href="#technology">Công nghệ</a></li>
                 <li><a href="#modules">Phạm vi</a></li> 
                 <li><a href="#roadmap">Lộ trình</a></li> 
                 <li><a href="#experts">Đội ngũ</a></li>
-                <li><a href="#acceptance">Nghiệm thu</a></li>
                 <li><a href="#maintenance">Bảo trì</a></li>
             </ul>
              <button class="nav-toggle" id="nav-toggle" aria-label="Mở menu">
@@ -322,7 +330,87 @@
                 </div>
             </div>
         </section>
-        
+
+        <!-- START: New Mindmap Section -->
+        <section id="mindmap">
+            <div class="container">
+                <h2 class="section-title fade-in">Cấu trúc Hệ thống & Quy trình</h2>
+                <p class="section-subtitle fade-in">Sơ đồ tổng quan thể hiện mối liên kết giữa các quy trình và phân hệ chức năng chính của hệ thống, giúp hình dung rõ luồng hoạt động tích hợp.</p>
+                <div class="mindmap-container fade-in">
+                    <div class="mindmap-center">Hệ thống Quản lý ISO Tích hợp</div>
+                    <div class="mindmap-node node-1">
+                        <h4>Quản lý Tài liệu & Hồ sơ</h4>
+                        <ul>
+                            <li>- Quy trình Soạn thảo & Góp ý</li>
+                            <li>- Quy trình Phê duyệt & Ban hành</li>
+                            <li>- Kiểm soát Phiên bản & Phân phối</li>
+                            <li>- Lưu trữ & Hủy bỏ</li>
+                        </ul>
+                    </div>
+                    <div class="mindmap-node node-2">
+                        <h4>Quản lý Nguồn lực</h4>
+                        <ul>
+                            <li>- Quản lý Nhân sự & Năng lực</li>
+                            <li>- Quản lý Thiết bị & Hiệu chuẩn</li>
+                            <li>- Quản lý Nhà cung cấp</li>
+                            <li>- Quản lý Khách hàng & Hợp đồng</li>
+                        </ul>
+                    </div>
+                    <div class="mindmap-node node-3">
+                        <h4>Quản lý Đánh giá & Cải tiến</h4>
+                        <ul>
+                            <li>- Đánh giá nội bộ</li>
+                            <li>- Sự không phù hợp (NC)</li>
+                            <li>- Hành động Khắc phục (CAR)</li>
+                            <li>- Xem xét của Lãnh đạo</li>
+                        </ul>
+                    </div>
+                    <div class="mindmap-node node-4">
+                        <h4>Báo cáo & Phân tích</h4>
+                        <ul>
+                            <li>- Dashboard & KPIs</li>
+                            <li>- Báo cáo Tuân thủ</li>
+                            <li>- Phân tích Xu hướng</li>
+                            <li>- Cảnh báo & Thông báo Tự động</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: New Mindmap Section -->
+
+        <section id="demo">
+            <div class="container">
+                <div id="video-demo">
+                    <h2 class="section-title fade-in">Video Demo Tổng quan</h2>
+                    <p class="section-subtitle fade-in">Xem qua video giới thiệu nhanh về cách hệ thống hoạt động và các tính năng chính sẽ được triển khai.</p>
+                    <div class="video-wrapper fade-in">
+                        <iframe src="https://www.youtube.com/embed/BKidqVlKaKM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+                <div id="ui-slider" style="margin-top: 80px;">
+                    <h2 class="section-title fade-in">Giao diện Hệ thống Dự kiến</h2>
+                    <p class="section-subtitle fade-in">Một số hình ảnh minh họa về giao diện người dùng trên các module chức năng chính của ứng dụng.</p>
+                    <div class="slider-container fade-in">
+                        <div class="slider-view">
+                            <div class="slider-wrapper">
+                                <div class="slide"><img src="https://i.ytimg.com/vi/cIblhkRiRgg/maxresdefault.jpg" alt="Hệ thống quản lý ISO 9001" loading="lazy"></div>
+                                <div class="slide"><img src="https://iasysgroup.com/wp-content/uploads/2025/05/blog-infographics_1-1024x677-1.jpg" alt="Hệ thống quản lý ISO 17025" loading="lazy"></div>
+                                <div class="slide"><img src="https://i.ytimg.com/vi/y--bvJPxCsU/maxresdefault.jpg" alt="Hệ thống quản lý ISO 17065t" loading="lazy"></div>
+                                <div class="slide"><img src="https://www.slideteam.net/media/catalog/product/cache/1280x720/d/o/document_management_system_dashboard_for_insights_slide01.jpg" alt="Giao diện Checklist Kiểm tra Chất lượng" loading="lazy"></div>
+                                <div class="slide"><img src="https://bkhost.vn/wp-content/uploads/2022/12/digital-signature-la-gi.jpg" alt="Giao diện Tự động hóa Quy trình" loading="lazy"></div>
+                            </div>
+                        </div>
+                        <div class="slider-nav">
+                            <button id="prevBtn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                            <button id="nextBtn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                        </div>
+                        <div class="slider-dots"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="technology">
             <div class="container">
@@ -405,86 +493,7 @@
                 </div>
             </div>
         </section>
-        <!-- START: New Mindmap Section -->
-        <section id="mindmap">
-            <div class="container">
-                <h2 class="section-title fade-in">Cấu trúc Hệ thống & Quy trình</h2>
-                <p class="section-subtitle fade-in">Sơ đồ tổng quan thể hiện mối liên kết giữa các quy trình và phân hệ chức năng chính của hệ thống, giúp hình dung rõ luồng hoạt động tích hợp.</p>
-                <div class="mindmap-container fade-in">
-                    <div class="mindmap-center">Hệ thống Quản lý ISO Tích hợp</div>
-                    <div class="mindmap-node node-1">
-                        <h4>Quản lý Tài liệu & Hồ sơ</h4>
-                        <ul>
-                            <li>- Quy trình Soạn thảo & Góp ý</li>
-                            <li>- Quy trình Phê duyệt & Ban hành</li>
-                            <li>- Kiểm soát Phiên bản & Phân phối</li>
-                            <li>- Lưu trữ & Hủy bỏ</li>
-                        </ul>
-                    </div>
-                    <div class="mindmap-node node-2">
-                        <h4>Quản lý Nguồn lực</h4>
-                        <ul>
-                            <li>- Quản lý Nhân sự & Năng lực</li>
-                            <li>- Quản lý Thiết bị & Hiệu chuẩn</li>
-                            <li>- Quản lý Nhà cung cấp</li>
-                            <li>- Quản lý Khách hàng & Hợp đồng</li>
-                        </ul>
-                    </div>
-                    <div class="mindmap-node node-3">
-                        <h4>Quản lý Đánh giá & Cải tiến</h4>
-                        <ul>
-                            <li>- Đánh giá nội bộ</li>
-                            <li>- Sự không phù hợp (NC)</li>
-                            <li>- Hành động Khắc phục (CAR)</li>
-                            <li>- Xem xét của Lãnh đạo</li>
-                        </ul>
-                    </div>
-                    <div class="mindmap-node node-4">
-                        <h4>Báo cáo & Phân tích</h4>
-                        <ul>
-                            <li>- Dashboard & KPIs</li>
-                            <li>- Báo cáo Tuân thủ</li>
-                            <li>- Phân tích Xu hướng</li>
-                            <li>- Cảnh báo & Thông báo Tự động</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- END: New Mindmap Section -->
 
-        <section id="demo">
-            <div class="container">
-                <div id="video-demo">
-                    <h2 class="section-title fade-in">Video Demo Tổng quan</h2>
-                    <p class="section-subtitle fade-in">Xem qua video giới thiệu nhanh về cách hệ thống hoạt động và các tính năng chính sẽ được triển khai.</p>
-                    <div class="video-wrapper fade-in">
-                        <iframe src="https://www.youtube.com/embed/BKidqVlKaKM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
-                
-                <div id="ui-slider" style="margin-top: 80px;">
-                    <h2 class="section-title fade-in">Giao diện Hệ thống Dự kiến</h2>
-                    <p class="section-subtitle fade-in">Một số hình ảnh minh họa về giao diện người dùng trên các module chức năng chính của ứng dụng.</p>
-                    <div class="slider-container fade-in">
-                        <div class="slider-view">
-                            <div class="slider-wrapper">
-                                <div class="slide"><img src="https://i.ytimg.com/vi/cIblhkRiRgg/maxresdefault.jpg" alt="Hệ thống quản lý ISO 9001" loading="lazy"></div>
-                                <div class="slide"><img src="https://iasysgroup.com/wp-content/uploads/2025/05/blog-infographics_1-1024x677-1.jpg" alt="Hệ thống quản lý ISO 17025" loading="lazy"></div>
-                                <div class="slide"><img src="https://i.ytimg.com/vi/y--bvJPxCsU/maxresdefault.jpg" alt="Hệ thống quản lý ISO 17065t" loading="lazy"></div>
-                                <div class="slide"><img src="https://www.slideteam.net/media/catalog/product/cache/1280x720/d/o/document_management_system_dashboard_for_insights_slide01.jpg" alt="Giao diện Checklist Kiểm tra Chất lượng" loading="lazy"></div>
-                                <div class="slide"><img src="https://bkhost.vn/wp-content/uploads/2022/12/digital-signature-la-gi.jpg" alt="Giao diện Tự động hóa Quy trình" loading="lazy"></div>
-                            </div>
-                        </div>
-                        <div class="slider-nav">
-                            <button id="prevBtn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-                            <button id="nextBtn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
-                        </div>
-                        <div class="slider-dots"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <section id="roadmap">
             <div class="container">
                 <h2 class="section-title fade-in">Lộ trình Triển khai Dự án</h2>
@@ -579,7 +588,6 @@
                     </div>
                      <div class="acceptance-card">
                         <h3>Ma trận Trách nhiệm (RACI)</h3>
-                        <p>Phân chia vai trò và trách nhiệm giữa các bên:</p>
                         <table class="raci-table">
                             <thead><tr><th>Hoạt động</th><th>EMS (Bên B)</th><th>Khách hàng (Bên A)</th></tr></thead>
                             <tbody>
@@ -695,15 +703,16 @@
             const navLinks = document.querySelectorAll(".nav-links a");
             const observerOptions = { rootMargin: "-30% 0px -70% 0px" };
             const sectionObserver = new IntersectionObserver((entries) => {
+                let currentActive = '';
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        const currentId = entry.target.getAttribute("id");
-                        navLinks.forEach((link) => {
-                            link.classList.remove("active-link");
-                            if (link.getAttribute("href") === `#${currentId}`) {
-                                link.classList.add("active-link");
-                            }
-                        });
+                         currentActive = entry.target.getAttribute("id");
+                    }
+                });
+                 navLinks.forEach((link) => {
+                    link.classList.remove("active-link");
+                    if (link.getAttribute("href") === `#${currentActive}`) {
+                        link.classList.add("active-link");
                     }
                 });
             }, observerOptions);
@@ -718,9 +727,56 @@
                 });
                 navMenu.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
-                        navMenu.classList.remove('show-menu');
+                         if (navMenu.classList.contains('show-menu')) {
+                            navMenu.classList.remove('show-menu');
+                        }
                     });
                 });
+            }
+
+            // UI Slider Logic
+            const sliderContainer = document.querySelector('.slider-container');
+            if (sliderContainer) {
+                const sliderWrapper = sliderContainer.querySelector('.slider-wrapper');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const dotsContainer = sliderContainer.querySelector('.slider-dots');
+                
+                if (!sliderWrapper || !prevBtn || !nextBtn || !dotsContainer) return;
+
+                const slides = Array.from(sliderWrapper.children);
+                let currentIndex = 0;
+                const totalSlides = slides.length;
+                let autoPlayInterval;
+
+                if (totalSlides > 0) {
+                    slides.forEach((_, i) => {
+                        const dot = document.createElement('div');
+                        dot.classList.add('dot');
+                        if (i === 0) dot.classList.add('active');
+                        dot.addEventListener('click', () => { goToSlide(i); resetAutoPlay(); });
+                        dotsContainer.appendChild(dot);
+                    });
+                    
+                    const dots = sliderContainer.querySelectorAll('.dot');
+                    
+                    const updateSlider = () => {
+                        sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+                        dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+                    }
+                    const goToSlide = (index) => { currentIndex = index; updateSlider(); }
+                    const nextSlide = () => { currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); }
+                    const prevSlide = () => { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); }
+                    const resetAutoPlay = () => {
+                        clearInterval(autoPlayInterval);
+                        autoPlayInterval = setInterval(nextSlide, 5000);
+                    }
+
+                    nextBtn.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
+                    prevBtn.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
+                    
+                    resetAutoPlay();
+                }
             }
         });
     </script>
