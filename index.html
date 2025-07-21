@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Blueprint: Hệ thống Quản lý ISO - Cục Tần Số Vô Tuyến</title>
+    <meta name="description" content="Kế hoạch triển khai chi tiết dự án xây dựng Hệ thống Quản lý Tài liệu & Hồ sơ theo tiêu chuẩn ISO 9001, 17025, 17065 cho Trung Tâm Kỹ Thuật - Cục Tần Số Vô Tuyến, thực hiện bởi EMS SOLUTION.">
+    <meta name="author" content="EMS SOLUTION">
+    <link rel="icon" type="image/png" href="https://gpems.net/logo-icon.png">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap');
+        :root {
+            --primary-color: #0747a6; /* Deep Blue for Trust */
+            --secondary-color: #172b4d; 
+            --accent-color: #00c7e6; /* Bright Cyan for Tech */
+            --light-bg-color: #f4f5f7; 
+            --text-color: #42526e; 
+            --heading-color: #172b4d;
+            --light-text-color: #fff; 
+            --border-color: #dfe1e6; 
+            --border-radius: 12px; 
+            --box-shadow: 0 4px 12px rgba(23, 43, 77, 0.08);
+            --box-shadow-hover: 0 12px 24px rgba(23, 43, 77, 0.15);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Be Vietnam Pro', sans-serif; line-height: 1.6; color: var(--text-color); background-color: #fff; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 60px 0; overflow: hidden; }
+        .section-title { text-align: center; font-size: 2.5em; color: var(--heading-color); margin-bottom: 15px; font-weight: 800; line-height: 1.2; }
+        .section-subtitle { text-align: center; max-width: 800px; margin: 0 auto 50px auto; color: var(--text-color); font-size: 1.15em; }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .navbar { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 15px 0; position: sticky; top: 0; z-index: 999; border-bottom: 1px solid var(--border-color); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo img { height: 40px; }
+        .nav-logo span { font-size: 1.3em; font-weight: 800; color: var(--heading-color); }
+        .nav-links { list-style: none; display: flex; gap: 35px; margin: 0; padding: 0;}
+        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 600; transition: color 0.3s; font-size: 1em; }
+        .nav-links a:hover, .nav-links a.active-link { color: var(--primary-color); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001;}
+
+        /* Hero Section */
+        .hero { color: var(--light-text-color); padding: 90px 0; text-align: center; background: var(--secondary-color) linear-gradient(45deg, var(--primary-color), var(--secondary-color)); }
+        .hero h1 { font-size: 3em; font-weight: 800; margin-bottom: 10px; }
+        .hero .project-id { display: inline-block; background-color: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 50px; font-weight: 600; margin-bottom: 20px; }
+        .hero p { font-size: 1.2em; max-width: 850px; margin: 0 auto; opacity: 0.9; }
+
+        /* Analysis Section */
+        #analysis { background-color: var(--light-bg-color); }
+        .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .analysis-card { background: #fff; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); border: 2px solid transparent; transition: all 0.3s ease-in-out; }
+        .analysis-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--box-shadow-hover); border-color: var(--primary-color); }
+        .analysis-card h3 { font-size: 1.5em; color: var(--heading-color); margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        .analysis-card h3 svg { color: var(--primary-color); }
+        .analysis-card ul { list-style: none; padding-left: 0; margin: 0; }
+        .analysis-card li { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 15px; }
+        .analysis-card li svg { flex-shrink: 0; width: 22px; height: 22px; margin-top: 2px; }
+        .analysis-card.pain-points li svg { color: #de350b; }
+        .analysis-card.objectives li svg { color: #00875a; }
+
+        /* Video & UI Slider Section */
+        #demo { background: #fff; }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 1000px; margin: 0 auto; border-radius: var(--border-radius); box-shadow: 0 10px 40px rgba(23, 43, 77, 0.2); }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .slider-container { max-width: 1000px; margin: 0 auto; position: relative; }
+        .slider-view { overflow: hidden; border-radius: var(--border-radius); }
+        .slider-wrapper { display: flex; transition: transform 0.5s ease-in-out; }
+        .slide { flex: 0 0 100%; }
+        .slide img { width: 100%; display: block; box-shadow: var(--box-shadow); aspect-ratio: 16 / 9; object-fit: cover; }
+        .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); width: calc(100% + 50px); left: -25px; display: flex; justify-content: space-between; box-sizing: border-box; }
+        .slider-nav button { background-color: rgba(23, 43, 77, 0.6); color: white; border: none; padding: 10px; font-size: 24px; cursor: pointer; border-radius: 50%; width: 50px; height: 50px; transition: background-color 0.3s; display: flex; align-items: center; justify-content: center; }
+        .slider-nav button:hover { background-color: rgba(23, 43, 77, 0.9); }
+        .slider-dots { text-align: center; margin-top: 20px; }
+        .dot { display: inline-block; width: 12px; height: 12px; background-color: var(--border-color); border-radius: 50%; margin: 0 6px; cursor: pointer; transition: all 0.3s; }
+        .dot.active { background-color: var(--primary-color); transform: scale(1.2); }
+
+        /* Modules Section */
+        #modules { background-color: var(--light-bg-color); }
+        .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
+        .module-card { background: #fff; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); border: 2px solid transparent; transition: all 0.3s ease-in-out; }
+        .module-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--box-shadow-hover); border-color: var(--primary-color); }
+        .module-card h3 { display: flex; align-items: center; gap: 15px; font-size: 1.4em; color: var(--primary-color); margin: 0 0 15px 0; }
+        .module-card h3 svg { width: 28px; height: 28px; }
+        .module-card ul { list-style: none; padding-left: 0; }
+        .module-card li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+        .module-card li svg { flex-shrink: 0; width: 20px; height: 20px; margin-top: 3px; color: #00875a; }
+
+        /* Roadmap Section */
+        #roadmap { background-color: #fff; }
+        .roadmap-container { position: relative; max-width: 1000px; margin: 0 auto; padding: 30px 0; }
+        .roadmap-container::before { content: ''; position: absolute; left: 50px; top: 0; bottom: 0; width: 4px; background: var(--border-color); }
+        .roadmap-phase { position: relative; padding-left: 120px; margin-bottom: 50px; }
+        .phase-icon { position: absolute; left: 50px; top: 0; transform: translateX(-50%); width: 100px; height: 100px; background: var(--light-bg-color); border: 4px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1; }
+        .phase-icon svg { width: 48px; height: 48px; color: var(--primary-color); }
+        .phase-content { background: #fff; border: 1px solid var(--border-color); padding: 25px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); transition: all 0.3s ease-in-out; }
+        .phase-content:hover { transform: scale(1.02); box-shadow: var(--box-shadow-hover); }
+        .phase-content h3 { font-size: 1.6em; margin-top: 0; color: var(--primary-color); }
+        .phase-content .lead-time { font-weight: 600; color: var(--text-color); margin-bottom: 15px; display: block; }
+        .phase-details h4 { font-size: 1.1em; color: var(--heading-color); margin: 20px 0 10px 0; }
+        .phase-details ul { list-style: none; padding: 0; margin: 0; }
+        .phase-details li { margin-bottom: 8px; }
+
+        /* Acceptance & RACI Section */
+        #acceptance { background-color: var(--light-bg-color); }
+        .acceptance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .acceptance-card { background-color: #fff; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
+        .acceptance-card h3 { color: var(--heading-color); font-size: 1.5em; margin: 0 0 15px 0; }
+        .raci-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        .raci-table th, .raci-table td { padding: 12px; text-align: center; border: 1px solid var(--border-color); }
+        .raci-table th { background-color: #fafbfb; }
+        .raci-table td:first-child { text-align: left; font-weight: 600; }
+        .raci-table .r { background-color: #e3fcef; }
+        .raci-table .a { background-color: #deebff; }
+        .raci-table .c { background-color: #fff0b3; }
+        .raci-table .i { background-color: #f4f5f7; }
+
+        /* Team Section */
+        #experts { background-color: #fff; }
+        .experts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; } 
+        .expert-card { background: var(--light-bg-color); padding: 30px; border-radius: var(--border-radius); text-align: center; box-shadow: var(--box-shadow); border: 2px solid transparent; transition: all 0.3s ease-in-out; } 
+        .expert-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--box-shadow-hover); border-color: var(--primary-color); }
+        .expert-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; } 
+        .expert-card h3 { font-size: 1.3em; color: var(--heading-color); margin-bottom: 5px; } 
+        .expert-card .title { color: var(--primary-color); font-weight: 600; margin-bottom: 15px; }
+
+        /* Footer */
+        footer { background-color: var(--secondary-color); color: #a5adba; padding: 50px 0 30px; } 
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; } 
+        .footer-col h4 { font-size: 1.1em; color: #fff; margin-bottom: 15px; }
+        .footer-col p, .footer-col a { color: #a5adba; text-decoration: none; } .footer-col a:hover { color: var(--accent-color); }
+        .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .footer-logo img { height: 40px; }
+        .footer-logo span { color: #fff; font-size: 1.3em; font-weight: 700; }
+        .copyright { text-align: center; padding-top: 30px; border-top: 1px solid #2c3e50; font-size: 0.9em; margin-top: 40px; }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .analysis-grid, .acceptance-grid { grid-template-columns: 1fr; }
+            .experts-grid, .footer-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-links { display: none; position: fixed; top: 0; right: -100%; width: 70%; max-width: 300px; height: 100vh; background-color: #fff; flex-direction: column; align-items: center; justify-content: center; gap: 30px; box-shadow: -5px 0 15px rgba(23, 43, 77, 0.1); transition: right 0.4s ease-in-out; z-index: 1000; }
+            .nav-links.show-menu { display: flex; right: 0; }
+            .roadmap-container::before { left: 25px; }
+            .roadmap-phase { padding-left: 70px; }
+            .phase-icon { width: 50px; height: 50px; left: 25px; }
+            .phase-icon svg { width: 24px; height: 24px; }
+            .slider-nav { display: none; }
+            .section-title { font-size: 2.2em; }
+            .hero h1 { font-size: 2.5em; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar"> 
+        <div class="container nav-container"> 
+            <a href="#hero" class="nav-logo">
+                <img src="https://gpems.net/logo-icon.png" alt="EMS Solution Logo">
+                <span>EMS SOLUTION</span>
+            </a> 
+            <ul class="nav-links" id="nav-links"> 
+                <li><a href="#analysis">Phân tích</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#modules">Phạm vi</a></li> 
+                <li><a href="#roadmap">Lộ trình</a></li> 
+                <li><a href="#acceptance">Trách nhiệm</a></li> 
+                <li><a href="#experts">Đội ngũ</a></li> 
+            </ul>
+             <button class="nav-toggle" id="nav-toggle" aria-label="Mở menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div> 
+    </nav>
+
+    <header class="hero" id="hero"> 
+        <div class="container fade-in"> 
+            <span class="project-id">Dự án: HD250325</span>
+            <h1>Project Blueprint: Hệ thống Quản lý Tích hợp ISO</h1> 
+            <p>Xây dựng và triển khai phần mềm quản lý tài liệu và hồ sơ theo tiêu chuẩn ISO 9001, 17025 & 17065 trên nền tảng Google Workspace & AppSheet.</p> 
+        </div> 
+    </header>
+
+    <main>
+        <section id="analysis">
+            <div class="container">
+                <h2 class="section-title fade-in">Phân tích Hiện trạng & Mục tiêu Dự án</h2>
+                <div class="analysis-grid fade-in">
+                    <div class="analysis-card pain-points">
+                        <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071 1.052A32.94 32.94 0 014.83 9.185.75.75 0 006.25 8.25a31.453 31.453 0 007.86-5.021.75.75 0 00-1.148-.942zM19.963 2.286a.75.75 0 00-1.071 1.052 32.94 32.94 0 01-8.053 5.847.75.75 0 001.418-.932 31.453 31.453 0 007.86-5.021.75.75 0 00-1.148-.942zM4.463 12.286a.75.75 0 00-1.071 1.052c1.944 2.108 4.04 3.96 6.228 5.464a.75.75 0 00.932-1.418A31.451 31.451 0 004.463 12.286zM19.463 12.286a.75.75 0 00-1.071 1.052 31.451 31.451 0 00-5.847 8.053.75.75 0 001.418-.932c1.62-2.18 3.024-4.493 4.215-6.83a.75.75 0 00-1.148-.942z" clip-rule="evenodd" /></svg>Hiện trạng & Nỗi đau</h3>
+                        <ul>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                                <div><strong>Quy trình thủ công, rời rạc:</strong> Tài liệu được quản lý qua giấy tờ, email, các file Excel phân tán, gây khó khăn trong việc kiểm soát phiên bản và truy xuất.</div>
+                            </li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                                <div><strong>Lãng phí thời gian:</strong> Việc phê duyệt, ban hành, theo dõi khắc phục tốn nhiều thời gian và nhân lực, dễ gây chậm trễ.</div>
+                            </li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                                <div><strong>Thiếu tính hệ thống:</strong> Khó khăn trong việc theo dõi lịch sử hiệu chuẩn, bảo dưỡng thiết bị và quản lý năng lực nhân sự theo yêu cầu ISO.</div>
+                            </li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                                <div><strong>Rủi ro tuân thủ:</strong> Việc thiếu công cụ giám sát và báo cáo tự động làm tăng rủi ro không tuân thủ trong các kỳ đánh giá chất lượng.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="analysis-card objectives">
+                        <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.649-.983l5.604 3.113z" clip-rule="evenodd" /></svg>Mục tiêu & Giải pháp Đề xuất</h3>
+                        <ul>
+                             <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                <div><strong>Số hóa & Tự động hóa:</strong> Xây dựng ứng dụng tập trung để quản lý toàn bộ vòng đời tài liệu, tự động hóa quy trình phê duyệt và thông báo.</div>
+                            </li>
+                             <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                <div><strong>Tăng hiệu quả vận hành:</strong> Giảm thời gian xử lý thủ công, cung cấp công cụ tra cứu nhanh chóng, giúp nhân sự tập trung vào chuyên môn.</div>
+                            </li>
+                             <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                <div><strong>Quản lý nguồn lực thông minh:</strong> Hệ thống hóa việc quản lý thiết bị (QR code), nhân sự (năng lực, đào tạo) trên cùng một nền tảng.</div>
+                            </li>
+                             <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                <div><strong>Đảm bảo tuân thủ:</strong> Cung cấp Dashboard theo dõi real-time, báo cáo tự động và lưu trữ bằng chứng đầy đủ, sẵn sàng cho mọi kỳ đánh giá.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="demo">
+            <div class="container">
+                <div id="video-demo">
+                    <h2 class="section-title fade-in">Video Demo Tổng quan</h2>
+                    <p class="section-subtitle fade-in">Xem qua video giới thiệu nhanh về cách hệ thống hoạt động và các tính năng chính sẽ được triển khai.</p>
+                    <div class="video-wrapper fade-in">
+                        <iframe src="https://www.youtube.com/embed/_8_f-46yG5U" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+                <div id="ui-slider" style="margin-top: 80px;">
+                    <h2 class="section-title fade-in">Giao diện Hệ thống Dự kiến</h2>
+                    <p class="section-subtitle fade-in">Một số hình ảnh minh họa về giao diện người dùng trên các module chức năng chính của ứng dụng.</p>
+                    <div class="slider-container fade-in">
+                        <div class="slider-view">
+                            <div class="slider-wrapper">
+                                <div class="slide"><img src="https://www.appsheet.com/Content/img/solutions/retail/app-screen-shots/sales-report-2.png" alt="Giao diện Dashboard Báo cáo" loading="lazy"></div>
+                                <div class="slide"><img src="https://appsheet-apps.com/wp-content/uploads/2021/10/Equipment-Maintenance-AppSheet.png" alt="Giao diện Quản lý Thiết bị trên AppSheet" loading="lazy"></div>
+                                <div class="slide"><img src="https://i.ytimg.com/vi/Dq0A9i2LIdE/maxresdefault.jpg" alt="Giao diện Danh sách Tài liệu ISO" loading="lazy"></div>
+                                <div class="slide"><img src="https://www.appsheet.com/Content/img/solutions/manufacturing/app-screen-shots/machine-inspections-2.png" alt="Giao diện Checklist Kiểm tra Chất lượng" loading="lazy"></div>
+                                <div class="slide"><img src="https://9to5google.com/wp-content/uploads/sites/4/2021/02/appsheet-automation.jpg" alt="Giao diện Tự động hóa Quy trình" loading="lazy"></div>
+                            </div>
+                        </div>
+                        <div class="slider-nav">
+                            <button id="prevBtn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                            <button id="nextBtn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                        </div>
+                        <div class="slider-dots"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="modules">
+            <div class="container">
+                <h2 class="section-title fade-in">Phạm vi & Modules Chức năng</h2>
+                <p class="section-subtitle fade-in">Hệ thống được thiết kế thành các module logic, bám sát các yêu cầu chi tiết đã thống nhất trong hợp đồng.</p>
+                <div class="module-grid fade-in">
+                    <div class="module-card">
+                        <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.378 1.602a.75.75 0 00-.756 0L3 7.225V18a.75.75 0 00.75.75h16.5a.75.75 0 00.75-.75V7.225l-8.622-5.623zM12 11.25a.75.75 0 01.75.75v5.25a.75.75 0 01-1.5 0v-5.25a.75.75 0 01.75-.75zM10.125 15a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5h-3.75z"/></svg>Quản lý Chất lượng ISO</h3>
+                        <ul>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div>Quản lý vòng đời tài liệu & hồ sơ.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div>Quản lý đánh giá nội bộ & theo dõi khắc phục.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div>Theo dõi sự không phù hợp & hành động phòng ngừa.</div></li>
+                        </ul>
+                    </div>
+                    <div class="module-card">
+                         <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 015.69 3.117.75.75 0 01-.931 1.214A5.245 5.245 0 0012 13.5a5.245 5.245 0 00-4.759 2.831.75.75 0 01-.931-1.214z" clip-rule="evenodd" /></svg>Quản lý Nguồn lực</h3>
+                        <ul>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div>Quản lý thiết bị, hiệu chuẩn, bảo dưỡng bằng QR Code.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div>Quản lý hồ sơ, năng lực và kế hoạch đào tạo nhân sự.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div>Quản lý hợp đồng với khách hàng và nhà cung cấp.</div></li>
+                        </ul>
+                    </div>
+                     <div class="module-card">
+                         <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.75 2.25a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h3a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-3zm-7.5 0A2.25 2.25 0 009 4.5v9a2.25 2.25 0 002.25 2.25h3a2.25 2.25 0 001.65-3.825V4.5a2.25 2.25 0 00-2.25-2.25h-3zM3 11.25a2.25 2.25 0 00-2.25 2.25v9A2.25 2.25 0 003 24.75h3A2.25 2.25 0 008.25 22.5v-9a2.25 2.25 0 00-2.25-2.25h-3z" /></svg>Báo cáo & Tiện ích</h3>
+                        <ul>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div>Dashboard phân tích dữ liệu trực quan theo thời gian thực.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div>Tự động gửi báo cáo và thông báo qua Email/Telegram.</div></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143Z" clip-rule="evenodd" /></svg><div>Phân quyền và bảo mật theo vai trò người dùng.</div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap">
+            <div class="container">
+                <h2 class="section-title fade-in">Lộ trình Triển khai Dự án</h2>
+                <div class="roadmap-container fade-in">
+                    <div class="roadmap-phase">
+                        <div class="phase-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 18V7.125c0-.621.504-1.125 1.125-1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V7.5z" /></svg></div>
+                        <div class="phase-content">
+                            <h3>Giai đoạn 1: Phác thảo & Báo giá</h3>
+                            <span class="lead-time">Lead time: 2 Tuần</span>
+                            <div class="phase-details">
+                                <h4>Hoạt động chính:</h4>
+                                <ul>
+                                    <li>Tổ chức buổi họp khởi động (Kick-off meeting).</li>
+                                    <li>Khảo sát và phân tích chi tiết quy trình hiện tại.</li>
+                                    <li>Xác định các yêu cầu chức năng và phi chức năng.</li>
+                                    <li>Thiết kế giải pháp tổng thể và kiến trúc hệ thống.</li>
+                                </ul>
+                                <h4>Sản phẩm bàn giao:</h4>
+                                <ul><li>Tài liệu Phân tích Yêu cầu (BRD) & Báo giá chi tiết.</li></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="roadmap-phase">
+                        <div class="phase-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg></div>
+                        <div class="phase-content">
+                            <h3>Giai đoạn 2: Triển khai & Phát triển</h3>
+                            <span class="lead-time">Lead time: 11 Tuần</span>
+                            <div class="phase-details">
+                                <h4>Hoạt động chính:</h4>
+                                <ul>
+                                    <li>Cấu hình môi trường Google Workspace.</li>
+                                    <li>Phát triển các module chức năng trên Google AppSheet.</li>
+                                    <li>Viết mã tùy chỉnh bằng Google Apps Script để tự động hóa.</li>
+                                    <li>Kiểm thử đơn vị (Unit Test) và tích hợp (Integration Test).</li>
+                                </ul>
+                                <h4>Sản phẩm bàn giao:</h4>
+                                <ul><li>Hệ thống phần mềm phiên bản Alpha & Beta, Báo cáo tiến độ.</li></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="roadmap-phase">
+                        <div class="phase-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0h9.75" /></svg></div>
+                        <div class="phase-content">
+                            <h3>Giai đoạn 3: Nghiệm thu & Đào tạo</h3>
+                            <span class="lead-time">Lead time: 2 Tuần</span>
+                            <div class="phase-details">
+                                <h4>Hoạt động chính:</h4>
+                                <ul>
+                                    <li>Hỗ trợ khách hàng thực hiện Kiểm thử Chấp nhận Người dùng (UAT).</li>
+                                    <li>Ghi nhận, xử lý các phản hồi và tinh chỉnh hệ thống.</li>
+                                    <li>Tổ chức các buổi đào tạo cho đội ngũ quản trị và người dùng cuối.</li>
+                                </ul>
+                                <h4>Sản phẩm bàn giao:</h4>
+                                <ul><li>Biên bản UAT & Tài liệu hướng dẫn sử dụng.</li></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="roadmap-phase">
+                        <div class="phase-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15m0-3l-3-3m0 0l-3 3m3-3v11.25" /></svg></div>
+                        <div class="phase-content">
+                            <h3>Giai đoạn 4: Bàn giao & Vận hành</h3>
+                            <span class="lead-time">Lead time: 1 Tuần</span>
+                            <div class="phase-details">
+                                <h4>Hoạt động chính:</h4>
+                                <ul>
+                                    <li>Triển khai hệ thống lên môi trường chính thức (Go-live).</li>
+                                    <li>Bàn giao toàn bộ tài khoản quản trị và tài liệu dự án.</li>
+                                    <li>Ký biên bản nghiệm thu và bắt đầu giai đoạn bảo trì.</li>
+                                </ul>
+                                <h4>Sản phẩm bàn giao:</h4>
+                                <ul><li>Hệ thống hoạt động chính thức & Biên bản nghiệm thu.</li></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="acceptance">
+           <div class="container">
+                <h2 class="section-title fade-in">Nghiệm thu & Phân chia Trách nhiệm</h2>
+                <div class="acceptance-grid fade-in">
+                    <div class="acceptance-card">
+                        <h3>Tiêu chí Bàn giao & Bảo trì</h3>
+                        <p>Dự án được xem là hoàn thành khi đáp ứng các tiêu chí:</p>
+                        <ul>
+                            <li>Tất cả các chức năng trong phạm vi đã hoạt động ổn định.</li>
+                            <li>Hệ thống đáp ứng các yêu cầu phi chức năng (bảo mật, hiệu năng).</li>
+                            <li>Hoàn thành việc đào tạo và bàn giao đầy đủ tài liệu.</li>
+                            <li><strong>Chính sách Bảo trì:</strong> 12 tháng hỗ trợ kỹ thuật miễn phí sau nghiệm thu.</li>
+                        </ul>
+                    </div>
+                     <div class="acceptance-card">
+                        <h3>Ma trận Trách nhiệm (RACI)</h3>
+                        <p>Phân chia vai trò và trách nhiệm giữa các bên:</p>
+                        <table class="raci-table">
+                            <thead><tr><th>Hoạt động</th><th>EMS</th><th>Khách hàng</th></tr></thead>
+                            <tbody>
+                                <tr><td>Cung cấp dữ liệu & quy trình</td><td class="c">C</td><td class="a">A, R</td></tr>
+                                <tr><td>Thiết kế & Phát triển PM</td><td class="a">A, R</td><td class="c">C, I</td></tr>
+                                <tr><td>Kiểm thử (UAT)</td><td class="c">C, I</td><td class="a">A, R</td></tr>
+                                <tr><td>Phê duyệt & Nghiệm thu</td><td class="i">I</td><td class="a">A, R</td></tr>
+                                <tr><td>Đào tạo & Hỗ trợ</td><td class="a">A, R</td><td class="c">C</td></tr>
+                            </tbody>
+                        </table>
+                        <small>R: Thực hiện, A: Chịu trách nhiệm, C: Tư vấn, I: Được thông báo</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experts"> 
+            <div class="container"> 
+                <h2 class="section-title fade-in">Đội ngũ Dự án</h2> 
+                <div class="experts-grid fade-in"> 
+                    <div class="expert-card"> <img src="https://admin.gpems.net/storage/uploads/courses/lecturers/dwDwZCThmWPgEM0kDi8XnYWkuLke9k-metaNzI0MjU1MTcwMTY2NzAzMTA4MC5wbmc%3D-.png" alt="Nguyễn Tấn Hiền"> <h3>Nguyễn Tấn Hiền</h3> <p class="title">Project Director</p> </div> 
+                    <div class="expert-card"> <img src="https://admin.gpems.net/storage/uploads/courses/lecturers/mlXRjIPyPsdcucphnW5fNbCrq9IRoH-metaMTkwMjE3NjgyNzE2NzE1MzM0MzAuanBn-.jpg" alt="Nguyễn Văn Hòa"> <h3>Nguyễn Văn Hòa</h3> <p class="title">Technical Lead</p> </div> 
+                    <div class="expert-card"> <img src="https://i.pravatar.cc/150?img=60" alt="Nguyễn Mạnh Tân"> <h3>Nguyễn Mạnh Tân</h3> <p class="title">Business Analyst</p> </div> 
+                </div>
+            </div> 
+        </section>
+    </main>
+    
+    <footer id="footer-contact"> 
+        <div class="container"> 
+            <div class="footer-grid"> 
+                <div class="footer-col"> 
+                    <a href="#hero" class="footer-logo">
+                        <img src="https://gpems.net/logo-icon.png" alt="EMS Solution Logo">
+                        <span>EMS SOLUTION</span>
+                    </a>
+                    <p>Đơn vị thực hiện dự án, chuyên cung cấp giải pháp chuyển đổi số trên nền tảng Google Workspace, AppSheet và Apps Script.</p> 
+                </div> 
+                <div class="footer-col"> 
+                    <h4>Thông tin Liên hệ Dự án</h4> 
+                    <p><strong>Quản lý dự án:</strong> Mr. Nguyễn Tấn Hiền<br> 
+                    <strong>Hotline:</strong> <a href="tel:0903375265">0903.375.265</a><br> 
+                    <strong>Email:</strong> <a href="mailto:nguyentanhien87@gmail.com">nguyentanhien87@gmail.com</a></p> 
+                </div> 
+                <div class="footer-col"> 
+                    <h4>Khách hàng</h4>
+                    <p><strong>Đơn vị:</strong> TRUNG TÂM KỸ THUẬT - CỤC TẦN SỐ VÔ TUYẾN<br>
+                    <strong>Đại diện:</strong> Mr. Nguyễn Phương Đông (Giám Đốc)</p>
+                </div> 
+            </div> 
+            <div class="copyright"> 
+                <p>Project Blueprint © 2025 EMS SOLUTION</p> 
+            </div> 
+        </div> 
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animation on scroll
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            faders.forEach(fader => appearOnScroll.observe(fader));
+
+            // Active Nav Link on Scroll
+            const sections = document.querySelectorAll("main section[id], header[id]");
+            const navLinks = document.querySelectorAll(".nav-links a");
+            const observerOptions = { rootMargin: "-30% 0px -70% 0px" };
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const currentId = entry.target.getAttribute("id");
+                        navLinks.forEach((link) => {
+                            link.classList.toggle("active-link", link.getAttribute("href") === `#${currentId}`);
+                        });
+                    }
+                });
+            }, observerOptions);
+            sections.forEach((section) => sectionObserver.observe(section));
+
+             // Mobile Menu Toggle
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-links');
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('show-menu');
+                });
+                navMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('show-menu');
+                    });
+                });
+            }
+
+            // UI Slider Logic
+            const sliderContainer = document.querySelector('.slider-container');
+            if (sliderContainer) {
+                const sliderWrapper = sliderContainer.querySelector('.slider-wrapper');
+                const slides = Array.from(sliderWrapper.children);
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const dotsContainer = sliderContainer.querySelector('.slider-dots');
+                
+                let currentIndex = 0;
+                const totalSlides = slides.length;
+                let autoPlayInterval;
+
+                if (totalSlides > 0) {
+                    slides.forEach((_, i) => {
+                        const dot = document.createElement('div');
+                        dot.classList.add('dot');
+                        dot.addEventListener('click', () => { goToSlide(i); resetAutoPlay(); });
+                        dotsContainer.appendChild(dot);
+                    });
+                    const dots = sliderContainer.querySelectorAll('.dot');
+                    
+                    const setSlidePosition = () => {
+                        sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+                        dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+                    }
+
+                    const goToSlide = (index) => { currentIndex = index; setSlidePosition(); }
+                    const nextSlide = () => { currentIndex = (currentIndex + 1) % totalSlides; setSlidePosition(); }
+                    const prevSlide = () => { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; setSlidePosition(); }
+                    
+                    const resetAutoPlay = () => {
+                        clearInterval(autoPlayInterval);
+                        autoPlayInterval = setInterval(nextSlide, 5000);
+                    }
+                    
+                    nextBtn.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
+                    prevBtn.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
+                    
+                    setSlidePosition();
+                    resetAutoPlay();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
