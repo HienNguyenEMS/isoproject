@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -7,6 +8,13 @@
     <meta name="description" content="Kế hoạch triển khai chi tiết dự án xây dựng Hệ thống Quản lý ISO 9001, 17025, 17065 cho Trung Tâm Kỹ Thuật - Cục Tần Số Vô Tuyến.">
     <meta name="author" content="EMS SOLUTION">
     <link rel="icon" type="image/png" href="https://gpems.net/logo-icon.png">
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="Kế hoạch Dự án: Hệ thống Quản lý ISO Tích hợp | EMS SOLUTION">
+    <meta property="og:description" content="Kế hoạch triển khai chi tiết dự án xây dựng Hệ thống Quản lý ISO 9001, 17025, 17065.">
+    <meta property="og:image" content="https://i.imgur.com/gYfJ5vY.png">
+    <meta property="og:url" content="URL_CUA_BAN">
+    <meta property="og:type" content="website">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap');
@@ -37,17 +45,20 @@
         .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
         .grid { display: grid; gap: 30px; }
+        .stagger-card { transition-delay: calc(0.1s * var(--i)); }
 
         /* --- Navbar --- */
-        .navbar { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 15px 0; position: sticky; top: 0; z-index: 999; border-bottom: 1px solid var(--border-color); }
+        .navbar { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 15px 0; position: sticky; top: 0; z-index: 999; border-bottom: 1px solid var(--border-color); transition: box-shadow 0.3s; }
         .nav-container { display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo img { height: 40px; }
         .nav-logo span { font-size: 1.3em; font-weight: 800; color: var(--heading-color); }
+        .nav-links-container { display: flex; align-items: center; }
         .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0;}
-        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 600; transition: color 0.3s; padding-bottom: 5px; border-bottom: 2px solid transparent; font-size: 0.95em; }
+        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 600; transition: all 0.3s; padding-bottom: 5px; border-bottom: 3px solid transparent; font-size: 0.95em; }
         .nav-links a:hover, .nav-links a.active-link { color: var(--primary-color); border-bottom-color: var(--primary-color); }
-        
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; z-index: 1001; }
+
         /* --- Hero Section --- */
         .hero { color: var(--heading-color); padding: 80px 0 60px; text-align: center; background-color: #fff; }
         .hero h1 { font-size: 3.2em; font-weight: 800; margin-bottom: 15px; line-height: 1.1; }
@@ -61,12 +72,11 @@
         .snapshot-card:hover { transform: translateY(-5px); background-color: var(--card-bg-color); box-shadow: var(--box-shadow); }
         .snapshot-card .label { font-weight: 600; color: var(--text-color); margin-bottom: 8px; font-size: 0.9em; }
         .snapshot-card .value { font-size: 1.6em; font-weight: 700; color: var(--primary-color); }
-        @media (min-width: 768px) { .snapshot-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (min-width: 1024px) { .snapshot-grid { grid-template-columns: repeat(6, 1fr); } }
-
-        /* --- Analysis & Impact Section --- */
+        
+        /* Other sections are largely the same, with minor tweaks for consistency */
         .analysis-grid { grid-template-columns: 1fr 1fr; align-items: stretch; }
-        .analysis-card { background: var(--card-bg-color); padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
+        .analysis-card { background: var(--card-bg-color); padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); transition: all 0.3s ease; }
+        .analysis-card:hover { transform: translateY(-5px); box-shadow: var(--box-shadow-hover); }
         .analysis-card h3 { font-size: 1.6em; color: var(--heading-color); margin: 0 0 20px 0; display: flex; align-items: center; gap: 12px; }
         .analysis-card h3 svg { width: 28px; height: 28px; }
         .analysis-card.pain-points h3 svg { color: var(--danger-color); }
@@ -76,8 +86,6 @@
         .analysis-card li svg { flex-shrink: 0; width: 22px; height: 22px; margin-top: 3px; }
         .analysis-card.pain-points li svg { color: var(--danger-color); }
         .analysis-card.objectives li svg { color: var(--success-color); }
-
-        /* Before/After Table */
         #impact { padding-top: 60px; }
         .impact-table-wrapper { background-color: var(--card-bg-color); border-radius: var(--border-radius); box-shadow: var(--box-shadow); overflow: hidden; border: 1px solid var(--border-color); }
         .impact-table { width: 100%; border-collapse: collapse; }
@@ -87,11 +95,7 @@
         .impact-table tbody tr:last-child td { border-bottom: none; }
         .impact-table .before { color: var(--danger-color); }
         .impact-table .after { color: var(--success-color); font-weight: 700; }
-        
-        /* --- Mindmap Section --- */
         #mindmap img { max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
-
-        /* --- System Details (Tabs) Section --- */
         .tabs-container { max-width: 900px; margin: 0 auto; }
         .tab-buttons { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; border-bottom: 1px solid var(--border-color); }
         .tab-button { padding: 15px 30px; cursor: pointer; background: none; border: none; font-size: 1.1em; font-weight: 600; color: var(--text-color); border-bottom: 3px solid transparent; transition: all 0.3s ease; }
@@ -99,19 +103,16 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeInContent 0.5s ease-in-out; }
         @keyframes fadeInContent { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
         .details-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
-        .details-card { background: var(--card-bg-color); padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); border-top: 4px solid var(--primary-color); }
+        .details-card { background: var(--card-bg-color); padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); border-top: 4px solid var(--primary-color); transition: all 0.3s ease; }
+        .details-card:hover { transform: translateY(-5px); box-shadow: var(--box-shadow-hover); }
         .details-card h3 { display: flex; align-items: center; gap: 15px; font-size: 1.4em; color: var(--primary-color); margin: 0 0 15px 0; }
         .details-card h3 svg { width: 28px; height: 28px; }
         .details-card ul { list-style: none; padding-left: 0; margin: 0; }
         .details-card li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
         .details-card li svg { flex-shrink: 0; width: 20px; height: 20px; margin-top: 3px; color: var(--success-color); }
-
-        /* --- Demo Section --- */
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 1000px; margin: 0 auto; border-radius: var(--border-radius); box-shadow: 0 10px 40px rgba(23, 43, 77, 0.2); }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        /* Slider styles are similar to original, kept for functionality */
         .slider-container { max-width: 1000px; margin: 0 auto; position: relative; }
         .slider-view { overflow: hidden; border-radius: var(--border-radius); }
         .slider-wrapper { display: flex; transition: transform 0.5s ease-in-out; }
@@ -123,8 +124,6 @@
         .slider-dots { text-align: center; margin-top: 20px; }
         .dot { display: inline-block; width: 12px; height: 12px; background-color: var(--border-color); border-radius: 50%; margin: 0 6px; cursor: pointer; transition: all 0.3s; }
         .dot.active { background-color: var(--primary-color); transform: scale(1.2); }
-
-        /* --- Roadmap Section --- */
         .roadmap-container { position: relative; max-width: 1000px; margin: 0 auto; padding: 30px 0; }
         .roadmap-container::before { content: ''; position: absolute; left: 50px; top: 0; bottom: 0; width: 4px; background: var(--border-color); border-radius: 2px; }
         .roadmap-phase { position: relative; padding-left: 120px; margin-bottom: 50px; }
@@ -134,16 +133,12 @@
         .phase-content:hover { transform: scale(1.02) translateX(10px); box-shadow: var(--box-shadow-hover); }
         .phase-content h3 { font-size: 1.8em; margin-top: 0; color: var(--primary-color); }
         .phase-content .lead-time { font-weight: 700; color: var(--heading-color); margin-bottom: 15px; display: block; background: var(--light-bg-color); padding: 5px 10px; border-radius: 6px; display: inline-block;}
-        
-        /* --- Team Section --- */
         .experts-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
         .expert-card { background: var(--card-bg-color); padding: 30px; border-radius: var(--border-radius); text-align: center; box-shadow: var(--box-shadow); border: 1px solid var(--border-color); transition: all 0.3s ease-in-out; } 
-        .expert-card:hover { transform: translateY(-8px); box-shadow: var(--box-shadow-hover); }
+        .expert-card:hover { transform: translateY(-8px); box-shadow: var(--box-shadow-hover); border-color: var(--primary-color); }
         .expert-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 4px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); } 
         .expert-card h3 { font-size: 1.3em; color: var(--heading-color); margin-bottom: 5px; } 
         .expert-card .title { color: var(--primary-color); font-weight: 600; margin-bottom: 15px; }
-
-        /* --- Governance & RACI Section --- */
         .governance-grid { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
         .governance-card { background-color: var(--card-bg-color); padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); border: 1px solid var(--border-color); }
         .governance-card h3 { color: var(--heading-color); font-size: 1.6em; margin: 0 0 20px 0; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px;}
@@ -156,8 +151,6 @@
         .raci-table .a { font-weight: 700; background-color: #deebff; }
         .raci-table .c { font-weight: 700; background-color: #fff0b3; }
         .raci-table .i { font-weight: 700; background-color: #f4f5f7; }
-
-        /* --- Maintenance Section --- */
         .maintenance-table-wrapper { overflow-x: auto; background-color: var(--card-bg-color); border: 1px solid var(--border-color); border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
         .maintenance-table { width: 100%; border-collapse: collapse; }
         .maintenance-table th, .maintenance-table td { padding: 18px; text-align: left; border-bottom: 1px solid var(--border-color); }
@@ -165,8 +158,6 @@
         .maintenance-table tbody tr:last-child td { border-bottom: none; }
         .maintenance-table tbody tr:nth-child(even) { background-color: var(--light-bg-color); }
         .maintenance-table td:nth-child(2) { font-weight: 600; color: var(--heading-color); }
-
-        /* --- Footer --- */
         footer { background-color: var(--secondary-color); color: #a5adba; padding: 60px 0 30px; } 
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; } 
         .footer-col h4 { font-size: 1.2em; color: #fff; margin-bottom: 20px; }
@@ -177,9 +168,17 @@
         .footer-logo span { color: #fff; font-size: 1.4em; font-weight: 700; }
         .copyright { text-align: center; padding-top: 40px; border-top: 1px solid #2c3e50; font-size: 0.9em; margin-top: 50px; }
 
-        /* --- Responsive Tweaks --- */
+        /* --- Back to Top Button --- */
+        .back-to-top { position: fixed; bottom: 20px; right: 20px; background-color: var(--primary-color); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; opacity: 0; visibility: hidden; transition: all 0.4s; z-index: 1000; }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+        .back-to-top:hover { background-color: var(--secondary-color); transform: translateY(-5px); }
+
+        /* --- Responsive Styles --- */
+        @media (min-width: 1024px) { .snapshot-grid { grid-template-columns: repeat(6, 1fr); } }
+        @media (min-width: 768px) and (max-width: 1023px) { .snapshot-grid { grid-template-columns: repeat(3, 1fr); } }
+
         @media (max-width: 991px) {
-            .analysis-grid, .governance-grid, .details-grid, .footer-grid { grid-template-columns: 1fr; }
+            .analysis-grid, .governance-grid, .details-grid, .footer-grid, .experts-grid { grid-template-columns: 1fr; }
             .roadmap-container::before { left: 30px; }
             .roadmap-phase { padding-left: 80px; }
             .phase-icon { width: 60px; height: 60px; left: 30px; }
@@ -188,7 +187,10 @@
         @media (max-width: 768px) {
             .section-title { font-size: 2.2em; }
             .hero h1 { font-size: 2.5em; }
-            .nav-links { display: none; } /* Simplified for demo */
+            .nav-links { position: fixed; top: 0; right: 0; width: 80%; max-width: 320px; height: 100vh; background-color: var(--card-bg-color); flex-direction: column; align-items: center; justify-content: center; gap: 40px; transform: translateX(100%); transition: transform 0.4s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+            .nav-links.active { transform: translateX(0); }
+            .nav-links a { font-size: 1.2em; }
+            .nav-toggle { display: block; }
             .slider-nav { display: none; }
             .tab-buttons { flex-direction: column; gap: 5px; align-items: stretch;}
             .tab-button { width: 100%; text-align: center; }
@@ -197,20 +199,25 @@
 </head>
 <body>
 
-    <nav class="navbar"> 
+    <nav class="navbar" id="navbar"> 
         <div class="container nav-container"> 
             <a href="#hero" class="nav-logo">
                 <img src="https://gpems.net/logo-icon.png" alt="EMS Solution Logo">
                 <span>EMS SOLUTION</span>
             </a> 
-            <ul class="nav-links" id="nav-links"> 
-                <li><a href="#analysis" class="active-link">Tổng quan</a></li>
-                <li><a href="#details">Hệ thống</a></li>
-                <li><a href="#demo">Demo</a></li>
-                <li><a href="#roadmap">Lộ trình</a></li>
-                <li><a href="#team">Đội ngũ</a></li>
-                <li><a href="#governance">Quản trị</a></li>
-            </ul>
+            <div class="nav-links-container">
+                <ul class="nav-links" id="nav-links"> 
+                    <li><a href="#analysis" class="nav-link">Tổng quan</a></li>
+                    <li><a href="#details" class="nav-link">Hệ thống</a></li>
+                    <li><a href="#demo" class="nav-link">Demo</a></li>
+                    <li><a href="#roadmap" class="nav-link">Lộ trình</a></li>
+                    <li><a href="#team" class="nav-link">Đội ngũ</a></li>
+                    <li><a href="#governance" class="nav-link">Quản trị</a></li>
+                </ul>
+            </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Mở menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
         </div> 
     </nav>
 
@@ -226,27 +233,27 @@
         <section id="snapshot">
             <div class="container">
                 <div class="grid snapshot-grid fade-in">
-                    <div class="snapshot-card">
+                    <div class="snapshot-card stagger-card" style="--i: 1;">
                         <div class="label">Phạm vi</div>
                         <div class="value">9+ Quy trình</div>
                     </div>
-                    <div class="snapshot-card">
+                    <div class="snapshot-card stagger-card" style="--i: 2;">
                         <div class="label">Thời gian</div>
                         <div class="value">16 Tuần</div>
                     </div>
-                     <div class="snapshot-card">
+                     <div class="snapshot-card stagger-card" style="--i: 3;">
                         <div class="label">Tiêu chuẩn</div>
                         <div class="value">3 Tích hợp</div>
                     </div>
-                    <div class="snapshot-card">
+                    <div class="snapshot-card stagger-card" style="--i: 4;">
                         <div class="label">Áp dụng</div>
                         <div class="value">5+ Phòng ban</div>
                     </div>
-                    <div class="snapshot-card">
+                    <div class="snapshot-card stagger-card" style="--i: 5;">
                         <div class="label">Ngân sách</div>
                         <div class="value">183.6M</div>
                     </div>
-                    <div class="snapshot-card">
+                    <div class="snapshot-card stagger-card" style="--i: 6;">
                         <div class="label">Hỗ trợ</div>
                         <div class="value">11M / Năm</div>
                     </div>
@@ -259,6 +266,7 @@
                 <h2 class="section-title fade-in">Phân tích & Tác động Dự án</h2>
                 <p class="section-subtitle fade-in">Hiểu rõ những thách thức hiện tại, mục tiêu cần đạt và giá trị thực tiễn mà dự án mang lại sau khi triển khai thành công.</p>
                 <div class="grid analysis-grid fade-in">
+                    <!-- Content identical to previous version -->
                     <div class="analysis-card pain-points">
                         <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071 1.052A32.94 32.94 0 014.83 9.185.75.75 0 006.25 8.25a31.453 31.453 0 007.86-5.021.75.75 0 00-1.148-.942zM19.963 2.286a.75.75 0 00-1.071 1.052 32.94 32.94 0 01-8.053 5.847.75.75 0 001.418-.932 31.453 31.453 0 007.86-5.021.75.75 0 00-1.148-.942zM4.463 12.286a.75.75 0 00-1.071 1.052c1.944 2.108 4.04 3.96 6.228 5.464a.75.75 0 00.932-1.418A31.451 31.451 0 004.463 12.286zM19.463 12.286a.75.75 0 00-1.071 1.052 31.451 31.451 0 00-5.847 8.053.75.75 0 001.418-.932c1.62-2.18 3.024-4.493 4.215-6.83a.75.75 0 00-1.148-.942z" clip-rule="evenodd" /></svg>Thách thức Hiện tại</h3>
                         <ul>
@@ -291,6 +299,7 @@
 
                 <div id="impact" class="fade-in">
                     <div class="impact-table-wrapper">
+                        <!-- Content identical to previous version -->
                         <table class="impact-table">
                             <thead>
                                 <tr>
@@ -303,17 +312,17 @@
                                 <tr>
                                     <td>Thời gian phê duyệt tài liệu</td>
                                     <td class="before">2-5 ngày làm việc, thủ công</td>
-                                    <td class="after">< 1 ngày, tự động hóa</td>
+                                    <td class="after">&lt; 1 ngày, tự động hóa</td>
                                 </tr>
                                  <tr>
                                     <td>Truy xuất hồ sơ thiết bị</td>
                                     <td class="before">Vài giờ, tìm kiếm file lẻ</td>
-                                    <td class="after">< 1 phút, quét QR code</td>
+                                    <td class="after">&lt; 1 phút, quét QR code</td>
                                 </tr>
                                 <tr>
                                     <td>Tính tuân thủ quy trình</td>
                                     <td class="before">Phụ thuộc con người, khó đo lường</td>
-                                    <td class="after">> 95%, giám sát real-time</td>
+                                    <td class="after">&gt; 95%, giám sát real-time</td>
                                 </tr>
                                 <tr>
                                     <td>Thời gian cho việc lặp lại</td>
@@ -331,7 +340,7 @@
             <div class="container">
                 <h2 class="section-title fade-in">Cấu trúc Hệ thống Tích hợp</h2>
                 <p class="section-subtitle fade-in">Sơ đồ tổng quan thể hiện mối liên kết giữa các phân hệ chức năng chính của hệ thống, giúp hình dung rõ luồng hoạt động tích hợp và toàn diện.</p>
-                <img src="https://i.imgur.com/gYfJ5vY.png" alt="Sơ đồ tư duy Hệ thống quản lý ISO tích hợp" class="fade-in">
+                <img src="https://i.imgur.com/gYfJ5vY.png" alt="Sơ đồ tư duy Hệ thống quản lý ISO tích hợp" class="fade-in" loading="lazy">
             </div>
         </section>
 
@@ -341,6 +350,7 @@
                 <p class="section-subtitle fade-in">Khám phá các phân hệ chức năng và nền tảng công nghệ được sử dụng để xây dựng giải pháp.</p>
                 
                 <div class="tabs-container fade-in">
+                    <!-- Tab content identical to previous version -->
                     <div class="tab-buttons">
                         <button class="tab-button active" data-tab="modules">Phân hệ Chức năng</button>
                         <button class="tab-button" data-tab="technology">Nền tảng Công nghệ</button>
@@ -348,7 +358,6 @@
 
                     <div id="modules-content" class="tab-content active">
                         <div class="grid details-grid">
-                            <!-- Content is identical to the previous version, kept for completeness -->
                             <div class="details-card">
                                 <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.378 1.602a.75.75 0 00-.756 0L3 7.225V18a.75.75 0 00.75.75h16.5a.75.75 0 00.75-.75V7.225l-8.622-5.623zM12 11.25a.75.75 0 01.75.75v5.25a.75.75 0 01-1.5 0v-5.25a.75.75 0 01.75-.75zM10.125 15a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5h-3.75z"/></svg>Quản lý Chất lượng</h3>
                                 <ul>
@@ -386,7 +395,6 @@
 
                     <div id="technology-content" class="tab-content">
                        <div class="grid details-grid">
-                            <!-- Content is identical to the previous version, kept for completeness -->
                             <div class="details-card">
                                 <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.378 1.602a.75.75 0 00-.756 0L3 7.225V18a.75.75 0 00.75.75h16.5a.75.75 0 00.75-.75V7.225l-8.622-5.623zM12 11.25a.75.75 0 01.75.75v5.25a.75.75 0 01-1.5 0v-5.25a.75.75 0 01.75-.75zM10.125 15a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5h-3.75z"/></svg>Google Workspace</h3>
                                 <ul>
@@ -427,21 +435,21 @@
                  <p class="section-subtitle fade-in">Xem qua video giới thiệu và hình ảnh giao diện để hình dung rõ hơn về sản phẩm cuối cùng.</p>
                 <div id="video-demo">
                     <div class="video-wrapper fade-in">
-                        <iframe src="https://www.youtube.com/embed/BKidqVlKaKM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/BKidqVlKaKM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
                     </div>
                 </div>
                 <div id="ui-slider" style="margin-top: 80px;">
                     <div class="slider-container fade-in">
                         <div class="slider-view">
                             <div class="slider-wrapper">
-                                <div class="slide"><img src="https://i.ytimg.com/vi/cIblhkRiRgg/maxresdefault.jpg" alt="Hệ thống quản lý ISO 9001"></div>
-                                <div class="slide"><img src="https://iasysgroup.com/wp-content/uploads/2025/05/blog-infographics_1-1024x677-1.jpg" alt="Hệ thống quản lý ISO 17025"></div>
-                                <div class="slide"><img src="https://www.slideteam.net/media/catalog/product/cache/1280x720/d/o/document_management_system_dashboard_for_insights_slide01.jpg" alt="Dashboard hệ thống"></div>
+                                <div class="slide"><img src="https://i.ytimg.com/vi/cIblhkRiRgg/maxresdefault.jpg" alt="Giao diện hệ thống quản lý ISO 9001" loading="lazy"></div>
+                                <div class="slide"><img src="https://iasysgroup.com/wp-content/uploads/2025/05/blog-infographics_1-1024x677-1.jpg" alt="Giao diện hệ thống quản lý ISO 17025" loading="lazy"></div>
+                                <div class="slide"><img src="https://www.slideteam.net/media/catalog/product/cache/1280x720/d/o/document_management_system_dashboard_for_insights_slide01.jpg" alt="Giao diện Dashboard của hệ thống" loading="lazy"></div>
                             </div>
                         </div>
                         <div class="slider-nav">
-                            <button id="prevBtn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-                            <button id="nextBtn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                            <button id="prevBtn" aria-label="Slide trước"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                            <button id="nextBtn" aria-label="Slide tiếp theo"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
                         </div>
                         <div class="slider-dots"></div>
                     </div>
@@ -453,7 +461,7 @@
             <div class="container">
                 <h2 class="section-title fade-in">Lộ trình Triển khai Dự án</h2>
                 <div class="roadmap-container fade-in">
-                    <!-- Roadmap content is identical to the previous version, kept for completeness -->
+                    <!-- Content identical to previous version -->
                     <div class="roadmap-phase">
                         <div class="phase-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 18V7.125c0-.621.504-1.125 1.125-1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V7.5z" /></svg></div>
                         <div class="phase-content">
@@ -511,23 +519,23 @@
                 <h2 class="section-title fade-in">Đội ngũ Chuyên gia</h2> 
                 <p class="section-subtitle fade-in">Dự án được thực hiện bởi các chuyên gia giàu kinh nghiệm của EMS SOLUTION, đảm bảo chất lượng và tiến độ.</p>
                 <div class="grid experts-grid fade-in"> 
-                    <div class="expert-card"> 
-                        <img src="https://admin.gpems.net/storage/uploads/courses/lecturers/dwDwZCThmWPgEM0kDi8XnYWkuLke9k-metaNzI0MjU1MTcwMTY2NzAzMTA4MC5wbmc%3D-.png" alt="Nguyễn Tấn Hiền"> 
+                    <div class="expert-card stagger-card" style="--i: 1;"> 
+                        <img src="https://admin.gpems.net/storage/uploads/courses/lecturers/dwDwZCThmWPgEM0kDi8XnYWkuLke9k-metaNzI0MjU1MTcwMTY2NzAzMTA4MC5wbmc%3D-.png" alt="Ảnh chân dung Nguyễn Tấn Hiền" loading="lazy"> 
                         <h3>Nguyễn Tấn Hiền</h3> 
                         <p class="title">Project Director</p> 
                     </div> 
-                    <div class="expert-card"> 
-                        <img src="https://admin.gpems.net/storage/uploads/courses/lecturers/mlXRjIPyPsdcucphnW5fNbCrq9IRoH-metaMTkwMjE3NjgyNzE2NzE1MzM0MzAuanBn-.jpg" alt="Nguyễn Văn Hòa"> 
+                    <div class="expert-card stagger-card" style="--i: 2;"> 
+                        <img src="https://admin.gpems.net/storage/uploads/courses/lecturers/mlXRjIPyPsdcucphnW5fNbCrq9IRoH-metaMTkwMjE3NjgyNzE2NzE1MzM0MzAuanBn-.jpg" alt="Ảnh chân dung Nguyễn Văn Hòa" loading="lazy"> 
                         <h3>Nguyễn Văn Hòa</h3> 
                         <p class="title">Technical Lead</p> 
                     </div> 
-                    <div class="expert-card"> 
-                        <img src="https://i.pravatar.cc/150?img=60" alt="Nguyễn Mạnh Tân"> 
+                    <div class="expert-card stagger-card" style="--i: 3;"> 
+                        <img src="https://i.pravatar.cc/150?img=60" alt="Ảnh chân dung Nguyễn Mạnh Tân" loading="lazy"> 
                         <h3>Nguyễn Mạnh Tân</h3> 
                         <p class="title">Business Analyst</p> 
                     </div> 
-                    <div class="expert-card"> 
-                        <img src="https://i.pravatar.cc/150?img=32" alt="Trần Minh Anh"> 
+                    <div class="expert-card stagger-card" style="--i: 4;"> 
+                        <img src="https://i.pravatar.cc/150?img=32" alt="Ảnh chân dung Trần Minh Anh" loading="lazy"> 
                         <h3>Trần Minh Anh</h3> 
                         <p class="title">QA/QC Specialist</p> 
                     </div> 
@@ -539,6 +547,7 @@
            <div class="container">
                 <h2 class="section-title fade-in">Quản trị Dự án & Trách nhiệm</h2>
                 <div class="grid governance-grid fade-in">
+                    <!-- Content identical to previous version -->
                     <div class="governance-card">
                         <h3>Các bên liên quan (Stakeholders)</h3>
                         <p><strong>Chủ đầu tư (Client):</strong> TRUNG TÂM KỸ THUẬT - CỤC TẦN SỐ VÔ TUYẾN, đại diện bởi Ban Lãnh đạo. Chịu trách nhiệm cung cấp yêu cầu, dữ liệu, phê duyệt các giai đoạn và nghiệm thu cuối cùng.</p>
@@ -567,6 +576,7 @@
                 <h2 class="section-title fade-in">Kế hoạch Bảo trì & Hỗ trợ</h2>
                 <p class="section-subtitle fade-in">Cam kết đồng hành cùng khách hàng sau khi dự án đi vào hoạt động (12 tháng miễn phí), đảm bảo hệ thống vận hành ổn định và hiệu quả.</p>
                 <div class="maintenance-table-wrapper fade-in">
+                    <!-- Content identical to previous version -->
                     <table class="maintenance-table">
                         <thead>
                             <tr>
@@ -605,6 +615,7 @@
     
     <footer id="footer-contact"> 
         <div class="container"> 
+            <!-- Content identical to previous version -->
             <div class="footer-grid"> 
                 <div class="footer-col"> 
                     <a href="#hero" class="footer-logo">
@@ -630,9 +641,13 @@
         </div> 
     </footer>
     
+    <a href="#hero" class="back-to-top" id="back-to-top" aria-label="Quay lại đầu trang">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    </a>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // --- Animation on scroll ---
+            // --- OPTIMIZATION 1: FADE-IN & STAGGER ANIMATION ---
             const faders = document.querySelectorAll('.fade-in');
             const appearOnScroll = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -644,22 +659,56 @@
             }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
             faders.forEach(fader => appearOnScroll.observe(fader));
 
+            // --- OPTIMIZATION 2: MOBILE NAV MENU ---
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-links');
+            if(navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                });
+                // Close menu when a link is clicked
+                navMenu.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+
+            // --- OPTIMIZATION 3: ACTIVE LINK ON SCROLL ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active-link', link.getAttribute('href').substring(1) === entry.target.id);
+                        });
+                    }
+                });
+            }, { rootMargin: '-40% 0px -60% 0px' });
+            sections.forEach(sec => scrollObserver.observe(sec));
+
+
+            // --- OPTIMIZATION 4: BACK TO TOP BUTTON ---
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+
             // --- Tab Functionality ---
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
             tabButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const tabName = button.getAttribute('data-tab');
-                    
                     tabButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
-                    
                     tabContents.forEach(content => {
-                        if (content.id === `${tabName}-content`) {
-                            content.classList.add('active');
-                        } else {
-                            content.classList.remove('active');
-                        }
+                        content.classList.toggle('active', content.id === `${tabName}-content`);
                     });
                 });
             });
@@ -674,11 +723,11 @@
                 
                 if (sliderWrapper && prevBtn && nextBtn && dotsContainer) {
                     const slides = Array.from(sliderWrapper.children);
-                    let currentIndex = 0;
-                    const totalSlides = slides.length;
-                    let autoPlayInterval;
+                    if (slides.length > 0) {
+                        let currentIndex = 0;
+                        const totalSlides = slides.length;
+                        let autoPlayInterval;
 
-                    if (totalSlides > 0) {
                         slides.forEach((_, i) => {
                             const dot = document.createElement('div');
                             dot.classList.add('dot');
@@ -688,7 +737,6 @@
                         });
                         
                         const dots = sliderContainer.querySelectorAll('.dot');
-                        
                         const updateSlider = () => {
                             sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
                             dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
